@@ -18,6 +18,18 @@ public class PlayerIdleState : IROGState
     {
         if (player.MoveInput != Vector2.zero)
             player.StateMachine.ChangeState(player.PlayerMoveState);
+
+        Enemy enemy = TargetManager.Instance.GetClosestEnemy();
+
+        if (enemy != null)
+        {
+            Vector3 dir = Vector3.right * (enemy.transform.position.x - player.transform.position.x) + Vector3.forward * (enemy.transform.position.z - player.transform.position.z);
+            dir.y = 0;
+
+            Quaternion dirQuat = Quaternion.LookRotation(dir);
+            Quaternion nextQuat = Quaternion.Slerp(player.transform.rotation, dirQuat, player.rotateSpeed * Time.deltaTime);
+            player.transform.rotation = nextQuat;
+        }
     }
 
     public void OnExit()
