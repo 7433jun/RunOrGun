@@ -19,7 +19,8 @@ public class PlayerIdleState : IROGState
         if (player.MoveInput != Vector2.zero)
             player.StateMachine.ChangeState(player.PlayerMoveState);
 
-        Enemy enemy = TargetManager.Instance.GetClosestEnemy();
+        //Enemy enemy = TargetManager.Instance.GetClosestEnemy();
+        Enemy enemy = ROGUtility.GetClosestEnemy(CharacterRegistry.Instance.Player, CharacterRegistry.Instance.Enemies);
 
         if (enemy != null)
         {

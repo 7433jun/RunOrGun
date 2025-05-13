@@ -23,12 +23,17 @@ public class Player : MonoBehaviour
         PlayerMoveState = new PlayerMoveState(this);
         StateMachine.ChangeState(PlayerIdleState);
 
-        TargetManager.Instance.RegisterPlayer(this);
+        CharacterRegistry.Instance.Register(this);
     }
 
     void Update()
     {
         StateMachine.Update();
+    }
+
+    void OnDestroy()
+    {
+        CharacterRegistry.Instance.Unregister(this);
     }
 
     void OnMove(InputValue value)

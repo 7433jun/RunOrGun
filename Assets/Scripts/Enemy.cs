@@ -15,11 +15,16 @@ public class Enemy : MonoBehaviour
 
         StateMachine = new StateMachine();
 
-        TargetManager.Instance.RegisterEnemy(this);
+        CharacterRegistry.Instance.Register(this);
     }
 
     void Update()
     {
         
+    }
+
+    void OnDestroy()
+    {
+        CharacterRegistry.Instance.Register(this);
     }
 }

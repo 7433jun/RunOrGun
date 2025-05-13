@@ -1,27 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetManager : MonoBehaviour
+public class ROGUtility
 {
-    public static TargetManager Instance { get; private set; }
-
-    private Player player;
-    private List<Enemy> enemies = new();
-
-    void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
-
-    public void RegisterPlayer(Player player) => this.player = player;
-    public void UnregisterPlayer() => this.player = null;
-    public void RegisterEnemy(Enemy enemy) => enemies.Add(enemy);
-    public void UnregisterEnemy(Enemy enemy) => enemies.Remove(enemy);
-
-    public Enemy GetClosestEnemy()
+    public static Enemy GetClosestEnemy(Player player, List<Enemy> enemies)
     {
         if (player == null || enemies.Count == 0)
             return null;
