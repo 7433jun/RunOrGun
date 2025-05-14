@@ -23,8 +23,8 @@ public class Enemy : MonoBehaviour
         
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
-        CharacterRegistry.Instance.Register(this);
+        CharacterRegistry.Instance?.Unregister(this);
     }
 }

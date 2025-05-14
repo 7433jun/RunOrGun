@@ -13,17 +13,19 @@ public class Player : MonoBehaviour
     public IROGState PlayerIdleState { get; private set; }
     public IROGState PlayerMoveState { get; private set; }
 
+    private float skinWidthOffset = 0.001f;
+
     void Start()
     {
         Controller = GetComponent<CharacterController>();
-        Controller.skinWidth = 0.001f;
+        Controller.skinWidth = skinWidthOffset;
 
         StateMachine = new StateMachine();
         PlayerIdleState = new PlayerIdleState(this);
         PlayerMoveState = new PlayerMoveState(this);
         StateMachine.ChangeState(PlayerIdleState);
 
-        CharacterRegistry.Instance.Register(this);
+        CharacterRegistry.Instance?.Register(this);
     }
 
     void Update()
@@ -31,9 +33,9 @@ public class Player : MonoBehaviour
         StateMachine.Update();
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
-        CharacterRegistry.Instance.Unregister(this);
+        CharacterRegistry.Instance?.Unregister(this);
     }
 
     void OnMove(InputValue value)
