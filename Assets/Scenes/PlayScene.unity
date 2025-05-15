@@ -4965,6 +4965,8 @@ GameObject:
   - component: {fileID: 2040474340}
   - component: {fileID: 2040474339}
   - component: {fileID: 2040474338}
+  - component: {fileID: 2040474342}
+  - component: {fileID: 2040474343}
   - component: {fileID: 2040474341}
   m_Layer: 0
   m_Name: Player
@@ -5002,8 +5004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fe6cc3a9c907a4ead075995015683f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  rotateSpeed: 30
 --- !u!114 &2040474339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,6 +5073,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystickBackground: {fileID: 684350883}
   onScreenStick: {fileID: 114480945743631870}
+--- !u!114 &2040474342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040474336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7adc4d6fb0f643a41818afe243a91192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  rotateSpeed: 30
+--- !u!114 &2040474343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040474336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ab7be2e56bf3644b785a0fdd867c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 0
+  attackCooldown: 0
+  damage: 0
 --- !u!1 &2063591292
 GameObject:
   m_ObjectHideFlags: 0

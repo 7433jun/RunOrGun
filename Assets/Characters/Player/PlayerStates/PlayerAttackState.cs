@@ -1,0 +1,42 @@
+using UnityEngine;
+
+public class PlayerAttackState : IROGState
+{
+    private Player player;
+
+    public PlayerAttackState(Player player)
+    {
+        this.player = player;
+    }
+
+    public void OnEnter()
+    {
+        Debug.Log("Player Attack");
+    }
+
+    public void OnUpdate()
+    {
+        if (player.MoveInput != Vector2.zero)
+        {
+            player.StateMachine.ChangeState(player.PlayerMoveState);
+            return;
+        }
+
+        Enemy enemy = ROGUtility.GetClosestEnemy(CharacterRegistry.Instance.Player, CharacterRegistry.Instance.Enemies);
+
+        if (enemy == null)
+        {
+            player.StateMachine.ChangeState(player.PlayerIdleState);
+            return;
+        }
+
+        Vector3 dir = enemy.transform.position - player.transform.position;
+        player.Movement.RotateTowards(dir);
+        player.Combat.TryAttack(enemy);
+    }
+
+    public void OnExit()
+    {
+
+    }
+}

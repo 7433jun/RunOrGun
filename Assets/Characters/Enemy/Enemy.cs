@@ -8,14 +8,17 @@ public class Enemy : MonoBehaviour
     public CharacterController Controller { get; private set; }
     public StateMachine StateMachine { get; private set; }
 
+    void OnEnable()
+    {
+        CharacterRegistry.Instance?.Register(this);
+    }
+
     void Start()
     {
         Controller = GetComponent<CharacterController>();
         Controller.skinWidth = 0.001f;
 
         StateMachine = new StateMachine();
-
-        CharacterRegistry.Instance.Register(this);
     }
 
     void Update()
