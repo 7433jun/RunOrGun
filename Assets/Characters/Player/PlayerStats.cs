@@ -1,16 +1,15 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public class PlayerStats
 {
-    public MovementStats Movement = new();
-    public AttackStats Attack = new();
-    public MagazineStats Magazine = new();
-    public ProjectileStats Projectile = new();
+    public PlayerMovementStats Movement = new();
+    public PlayerAttackStats Attack = new();
+    public PlayerMagazineStats Magazine = new();
+    public PlayerProjectileStats Projectile = new();
 
     [Serializable]
-    public class MovementStats
+    public class PlayerMovementStats
     {
         public float moveSpeed;
         public float rotateSpeed;
@@ -18,7 +17,7 @@ public class PlayerStats
     }
 
     [Serializable]
-    public class AttackStats
+    public class PlayerAttackStats
     {
         public float power;
         public float powerRate;
@@ -32,7 +31,7 @@ public class PlayerStats
     }
 
     [Serializable]
-    public class MagazineStats
+    public class PlayerMagazineStats
     {
         public int size;
         public float reloadCooldown;
@@ -40,7 +39,7 @@ public class PlayerStats
     }
 
     [Serializable]
-    public class ProjectileStats
+    public class PlayerProjectileStats
     {
         public float size;
         public float sizeRate;
