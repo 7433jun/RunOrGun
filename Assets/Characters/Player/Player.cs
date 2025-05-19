@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
         playerStats.Magazine.reloadCooldown = 3f;
         playerStats.Magazine.reloadCooldownRate = 1f;
 
-        playerStats.Projectile.size = 5f;
         playerStats.Projectile.sizeRate = 1f;
         playerStats.Projectile.speed = 5f;
         playerStats.Projectile.bounceWall = 0;

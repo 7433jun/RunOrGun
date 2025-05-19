@@ -40,9 +40,11 @@ public class PlayerMagazineStatsDTO
 [System.Serializable]
 public class PlayerProjectileStatsDTO
 {
-    public float size;
     public float sizeRate;
     public float speed;
+    public float speedRate;
+    public float lifeTime;
+    public float lifeTimeRate;
     public int bounceWall;
     public int bounceEnemy;
     public int pierceEnemy;
