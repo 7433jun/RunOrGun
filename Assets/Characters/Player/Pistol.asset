@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   weaponId: 0001
-  weaponData:
+  weaponModel:
     prefab: {fileID: 6855329764551851808, guid: 1e4204549b33ce94b9aa0d0a9e940714, type: 3}
     pos: {x: 0, y: 0, z: -0.05}
     rot: {x: 0, y: 90, z: 0}
     scale: {x: 1, y: 1, z: 1}
     muzzleOffset: {x: 0, y: 0.08, z: 0.19}
   projectileData:
+    prefab: {fileID: 2212977240336636280, guid: 58fd03febfafee448abf1e1d00bd6d12, type: 3}
+    colliderRadius: 0.03
+    colliderHeight: 0.09
+  projectileModel:
     prefab: {fileID: 1079896747670843530, guid: a5e8b4ca7ff939247a57c5ee467a7c91, type: 3}
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 90, z: 0}
     scale: {x: 5, y: 5, z: 5}
-  projectilePrefab: {fileID: 2212977240336636280, guid: 58fd03febfafee448abf1e1d00bd6d12, type: 3}

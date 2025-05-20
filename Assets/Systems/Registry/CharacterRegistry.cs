@@ -1,46 +1,41 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class CharacterRegistry : MonoBehaviour
+public static class CharacterRegistry
 {
-    public static CharacterRegistry Instance { get; private set; }
+    private static Player player;
+    private static List<Enemy> enemies = new();
 
-    private Player player;
-    private List<Enemy> enemies = new();
+    public static Player Player => player;
+    public static List<Enemy> Enemies => enemies;
 
-    public Player Player => player;
-    public List<Enemy> Enemies => enemies;
-
-    void Awake()
+    public static void Register<T>(T entity)
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
-
-    public void Register<T>(T entity)
-    {
-        if (entity is Player player)
+        if (entity is Player p)
         {
-            this.player = player;
+            player = p;
         }
-        if (entity is Enemy enemy)
+        if (entity is Enemy e)
         {
-            enemies.Add(enemy);
+            enemies.Add(e);
         }
     }
 
-    public void Unregister<T>(T entity)
+    public static void Unregister<T>(T entity)
     {
         if (entity is Player player)
         {
-            this.player = null;
+            player = null;
         }
         if (entity is Enemy enemy)
         {
             enemies.Remove(enemy);
         }
+    }
+
+    public static void Clear()
+    {
+        player = null;
+        enemies.Clear();
     }
 }

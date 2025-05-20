@@ -9,9 +9,9 @@ public class PlayerVisual : MonoBehaviour
         if (currentModel != null)
             Destroy(currentModel);
 
-        currentModel = Instantiate(weaponDefinition.weaponData.prefab, transform);
-        currentModel.transform.position = weaponDefinition.weaponData.pos;
-        currentModel.transform.rotation = Quaternion.Euler(weaponDefinition.weaponData.rot);
-        currentModel.transform.localScale = weaponDefinition.weaponData.scale;
+        currentModel = Instantiate(weaponDefinition.weaponModel.prefab, transform);
+        currentModel.transform.position = weaponDefinition.weaponModel.pos;
+        currentModel.transform.rotation = Quaternion.Euler(weaponDefinition.weaponModel.rot);
+        currentModel.transform.localScale = weaponDefinition.weaponModel.scale;
     }
 }

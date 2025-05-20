@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 
     private float sizeRate;
     private float speed;
-    private float lifeTime = 1f;
+    private float lifeTime;
     private int bounceWall;
     private int bounceEnemy;
     private int pierceEnemy;
@@ -15,11 +15,14 @@ public class Projectile : MonoBehaviour
 
     public void Initilize(WeaponDefinition weaponDefinition, PlayerProjectileStats projectileStats)
     {
-        model = Instantiate(weaponDefinition.projectileData.prefab, transform);
+        CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
+        capsuleCollider.radius = weaponDefinition.projectileData.colliderRadius;
+        capsuleCollider.height = weaponDefinition.projectileData.colliderHeight;
 
-        model.transform.localPosition = weaponDefinition.projectileData.pos;
-        model.transform.rotation = Quaternion.Euler(weaponDefinition.projectileData.rot);
-        model.transform.localScale = weaponDefinition.projectileData.scale;
+        model = Instantiate(weaponDefinition.projectileModel.prefab, transform);
+        model.transform.localPosition = weaponDefinition.projectileModel.pos;
+        model.transform.localRotation = Quaternion.Euler(weaponDefinition.projectileModel.rot);
+        model.transform.localScale = weaponDefinition.projectileModel.scale;
 
         this.sizeRate = projectileStats.sizeRate;
         this.speed = projectileStats.speed * projectileStats.speedRate;
@@ -27,6 +30,8 @@ public class Projectile : MonoBehaviour
         bounceWall = projectileStats.bounceWall;
         bounceEnemy = projectileStats.bounceEnemy;
         pierceEnemy = projectileStats.pierceEnemy;
+
+        
     }
 
     void OnEnable()

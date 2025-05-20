@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     void OnEnable()
     {
-        CharacterRegistry.Instance?.Register(this);
+        CharacterRegistry.Register(this);
     }
 
     void Start()
@@ -53,6 +53,9 @@ public class Player : MonoBehaviour
 
         playerStats.Projectile.sizeRate = 1f;
         playerStats.Projectile.speed = 5f;
+        playerStats.Projectile.speedRate = 1f;
+        playerStats.Projectile.lifeTime = 3f;
+        playerStats.Projectile.lifeTimeRate = 1f;
         playerStats.Projectile.bounceWall = 0;
         playerStats.Projectile.bounceEnemy = 0;
         playerStats.Projectile.pierceEnemy = 0;
@@ -75,7 +78,7 @@ public class Player : MonoBehaviour
 
     void OnDisable()
     {
-        CharacterRegistry.Instance?.Unregister(this);
+        CharacterRegistry.Unregister(this);
     }
 
     void OnMove(InputValue value)

@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     void OnEnable()
     {
-        CharacterRegistry.Instance?.Register(this);
+        CharacterRegistry.Register(this);
     }
 
     void Start()
@@ -28,6 +28,6 @@ public class Enemy : MonoBehaviour
 
     void OnDisable()
     {
-        CharacterRegistry.Instance?.Unregister(this);
+        CharacterRegistry.Unregister(this);
     }
 }

@@ -11,7 +11,7 @@ public class PlayerAttackState : IROGState
 
     public void OnEnter()
     {
-        Debug.Log("Player Attack");
+        //Debug.Log("Player Attack");
     }
 
     public void OnUpdate()
@@ -22,7 +22,7 @@ public class PlayerAttackState : IROGState
             return;
         }
 
-        Enemy enemy = ROGUtility.GetClosestEnemy(CharacterRegistry.Instance.Player, CharacterRegistry.Instance.Enemies);
+        Enemy enemy = ROGUtility.GetClosestEnemy(CharacterRegistry.Player, CharacterRegistry.Enemies);
 
         if (enemy == null)
         {

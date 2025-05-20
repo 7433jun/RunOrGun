@@ -5,13 +5,13 @@ using UnityEngine;
 public class WeaponDefinition : ScriptableObject
 {
     public string weaponId;
-    public WeaponData weaponData;
+    public WeaponModel weaponModel;
     public ProjectileData projectileData;
-    public GameObject projectilePrefab;
+    public ProjectileModel projectileModel;
 }
 
 [Serializable]
-public class WeaponData
+public class WeaponModel
 {
     public GameObject prefab;
     public Vector3 pos;
@@ -22,6 +22,14 @@ public class WeaponData
 
 [Serializable]
 public class ProjectileData
+{
+    public GameObject prefab;
+    public float colliderRadius;
+    public float colliderHeight;
+}
+
+[Serializable]
+public class ProjectileModel
 {
     public GameObject prefab;
     public Vector3 pos;

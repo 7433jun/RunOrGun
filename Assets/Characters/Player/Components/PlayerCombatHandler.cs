@@ -22,13 +22,13 @@ public class PlayerCombatHandler : MonoBehaviour
     {
         if (enemy == null || !CanAttack()) return;
 
-        Vector3 projectileSpawnPos = transform.TransformPoint(weaponDefinition.weaponData.muzzleOffset);
+        Vector3 projectileSpawnPos = transform.TransformPoint(weaponDefinition.weaponModel.muzzleOffset);
 
         Vector3 direction = enemy.transform.position - projectileSpawnPos;
         direction.y = 0;
         Quaternion rotation = Quaternion.LookRotation(direction.normalized);
 
-        GameObject projectileObj = Instantiate(weaponDefinition.projectilePrefab, projectileSpawnPos, rotation);
+        GameObject projectileObj = Instantiate(weaponDefinition.projectileData.prefab, projectileSpawnPos, rotation);
 
         var projectile = projectileObj.GetComponent<Projectile>();
         projectile.Initilize(weaponDefinition, stats.Projectile);

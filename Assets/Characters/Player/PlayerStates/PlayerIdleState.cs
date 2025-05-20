@@ -11,7 +11,7 @@ public class PlayerIdleState : IROGState
 
     public void OnEnter()
     {
-        Debug.Log("Player Idle");
+        //Debug.Log("Player Idle");
     }
 
     public void OnUpdate()
@@ -21,7 +21,7 @@ public class PlayerIdleState : IROGState
             player.StateMachine.ChangeState(player.PlayerMoveState);
             return;
         }
-        if (CharacterRegistry.Instance?.Enemies.Count != 0)
+        if (CharacterRegistry.Enemies.Count != 0)
         {
             player.StateMachine.ChangeState(player.PlayerAttackState);
             return;
