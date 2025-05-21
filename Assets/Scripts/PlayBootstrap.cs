@@ -6,6 +6,8 @@ public class PlayBootstrap : MonoBehaviour
 
     public void Compose()
     {
+        CharacterRegistry.Clear();
+
 
     }
 }
