@@ -3,7 +3,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.OnScreen;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
-public class JoystickSpawner : MonoBehaviour
+public class Joystick : MonoBehaviour
 {
     [SerializeField]
     private RectTransform joystickBackground;
