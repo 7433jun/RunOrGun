@@ -24,11 +24,6 @@ public class Player : MonoBehaviour
         Combat = GetComponent<PlayerCombatHandler>();
     }
 
-    void OnEnable()
-    {
-        CharacterRegistry.Register(this);
-    }
-
     void Start()
     {
         playerStats = new();
@@ -74,11 +69,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         StateMachine.Update();
-    }
-
-    void OnDisable()
-    {
-        CharacterRegistry.Unregister(this);
     }
 
     void OnMove(InputValue value)

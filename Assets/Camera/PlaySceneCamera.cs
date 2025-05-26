@@ -10,8 +10,6 @@ public class PlaySceneCamera : MonoBehaviour
 
     void Start()
     {
-        target = CharacterRegistry.Player?.transform;
-
         camForward = Quaternion.Euler(camRotationX, 0f, 0f) * Vector3.forward;
         transform.rotation = Quaternion.Euler(camRotationX, 0f, 0f);
     }
@@ -27,5 +25,10 @@ public class PlaySceneCamera : MonoBehaviour
             camPos.x = 0;
             transform.position = camPos;
         }
+    }
+
+    public void SetTarget(Transform targetTransform)
+    {
+        target = targetTransform;
     }
 }

@@ -10,18 +10,21 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField] private Vector3 playerPos;
     [SerializeField] private List<Vector3> enemyPosList;
 
-    public void SpawnPlayer()
+    public Player SpawnPlayer()
     {
-        Instantiate(playerPrefab, playerPos, Quaternion.identity);
+        GameObject gameObject = Instantiate(playerPrefab, playerPos, Quaternion.identity);
+        return gameObject.GetComponent<Player>();
     }
 
-    public void SpawnEnemy()
+    public List<Enemy> SpawnEnemy()
     {
-        if (enemyPosList.Count == 0) return;
+        List<Enemy> list = new();
 
         foreach (Vector3 pos in enemyPosList)
         {
-            Instantiate(enemyPrefab, pos, Quaternion.identity);
+            GameObject gameObject = Instantiate(enemyPrefab, pos, Quaternion.identity);
+            list.Add(gameObject.GetComponent<Enemy>());
         }
+        return list;
     }
 }

@@ -6,10 +6,14 @@ public class PlayBootstrap : MonoBehaviour
 
     public void Compose()
     {
-        CharacterRegistry.Clear();
+        CharacterRegistry.Instance.Clear();
 
-        characterSpawner.SpawnPlayer();
-        characterSpawner.SpawnEnemy();
+        var player = characterSpawner.SpawnPlayer();
+        CharacterRegistry.Instance.Register(player);
 
+        foreach (var enemy in characterSpawner.SpawnEnemy())
+        {
+            CharacterRegistry.Instance.Register(enemy);
+        }
     }
 }

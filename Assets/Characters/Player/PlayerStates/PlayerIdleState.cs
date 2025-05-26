@@ -21,7 +21,7 @@ public class PlayerIdleState : IROGState
             player.StateMachine.ChangeState(player.PlayerMoveState);
             return;
         }
-        if (CharacterRegistry.Enemies.Count != 0)
+        if (CharacterRegistry.Instance.Enemies.Count != 0)
         {
             player.StateMachine.ChangeState(player.PlayerAttackState);
             return;

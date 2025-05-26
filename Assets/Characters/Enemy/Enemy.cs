@@ -8,11 +8,6 @@ public class Enemy : MonoBehaviour
     public CharacterController Controller { get; private set; }
     public StateMachine StateMachine { get; private set; }
 
-    void OnEnable()
-    {
-        CharacterRegistry.Register(this);
-    }
-
     void Start()
     {
         Controller = GetComponent<CharacterController>();
@@ -26,8 +21,4 @@ public class Enemy : MonoBehaviour
         
     }
 
-    void OnDisable()
-    {
-        CharacterRegistry.Unregister(this);
-    }
 }

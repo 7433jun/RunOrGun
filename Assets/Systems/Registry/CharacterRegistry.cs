@@ -1,15 +1,26 @@
 using System;
 using System.Collections.Generic;
 
-public static class CharacterRegistry
+public class CharacterRegistry
 {
-    private static Player player;
-    private static List<Enemy> enemies = new();
+    private static CharacterRegistry instance;
+    public static CharacterRegistry Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = new CharacterRegistry();
+            return instance;
+        }
+    }
 
-    public static Player Player => player;
-    public static List<Enemy> Enemies => enemies;
+    private Player player;
+    private List<Enemy> enemies = new();
 
-    public static void Register<T>(T entity)
+    public Player Player => player;
+    public List<Enemy> Enemies => enemies;
+
+    public void Register<T>(T entity)
     {
         if (entity is Player p)
         {
@@ -21,7 +32,7 @@ public static class CharacterRegistry
         }
     }
 
-    public static void Unregister<T>(T entity)
+    public void Unregister<T>(T entity)
     {
         if (entity is Player player)
         {
@@ -33,7 +44,7 @@ public static class CharacterRegistry
         }
     }
 
-    public static void Clear()
+    public void Clear()
     {
         player = null;
         enemies.Clear();
