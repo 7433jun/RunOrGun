@@ -9,9 +9,11 @@ public class Player : MonoBehaviour
     private PlayerStats playerStats;
 
     public StateMachine StateMachine { get; private set; }
+    public IROGState PlayerStartState { get; private set; }
     public IROGState PlayerIdleState { get; private set; }
     public IROGState PlayerMoveState { get; private set; }
     public IROGState PlayerAttackState { get; private set; }
+    public IROGState PlayerDieState { get; private set; }
 
     public PlayerVisual Visual { get; private set; }
     public PlayerMovementHandler Movement { get; private set; }
@@ -60,10 +62,12 @@ public class Player : MonoBehaviour
         Combat.Initialize(currentWeapon, playerStats);
 
         StateMachine = new StateMachine();
+        PlayerStartState = new PlayerSpawnState(this);
         PlayerIdleState = new PlayerIdleState(this);
         PlayerMoveState = new PlayerMoveState(this);
         PlayerAttackState = new PlayerAttackState(this);
-        StateMachine.ChangeState(PlayerIdleState);
+        PlayerDieState = new PlayerDieState(this);
+        StateMachine.ChangeState(PlayerStartState);
     }
 
     void Update()
