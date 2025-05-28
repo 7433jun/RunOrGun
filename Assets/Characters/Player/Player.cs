@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     public Vector2 MoveInput { get; private set; }
 
+    public CharacterRegistry characterRegistry;
     public WeaponDefinition currentWeapon;
     private PlayerStats playerStats;
 
@@ -73,6 +74,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         StateMachine.Update();
+    }
+
+    public void Initialize(CharacterRegistry registry)
+    {
+        characterRegistry = registry;
     }
 
     void OnMove(InputValue value)

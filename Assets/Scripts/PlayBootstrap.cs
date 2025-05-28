@@ -2,18 +2,32 @@ using UnityEngine;
 
 public class PlayBootstrap : MonoBehaviour
 {
+    [SerializeField] private PlayContext context;
     [SerializeField] private CharacterSpawner characterSpawner;
+    [SerializeField] private PlaySceneCamera camera;
 
     public void Compose()
     {
-        CharacterRegistry.Instance.Clear();
+        // 컨텍스트 초기화
+        context.Initialize();
 
+        // 플레이어 생성, 주입
         var player = characterSpawner.SpawnPlayer();
-        CharacterRegistry.Instance.Register(player);
+        player.Initialize(context.CharacterRegistry);
 
+        // 적 생성, 주입
         foreach (var enemy in characterSpawner.SpawnEnemy())
         {
-            CharacterRegistry.Instance.Register(enemy);
+            enemy.Initialize(context.CharacterRegistry);
         }
+
+
+        // 카메라 초기화
+        
+
+
+
+
+
     }
 }

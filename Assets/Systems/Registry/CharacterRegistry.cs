@@ -3,22 +3,17 @@ using System.Collections.Generic;
 
 public class CharacterRegistry
 {
-    private static CharacterRegistry instance;
-    public static CharacterRegistry Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = new CharacterRegistry();
-            return instance;
-        }
-    }
-
     private Player player;
-    private List<Enemy> enemies = new();
+    private List<Enemy> enemies;
 
     public Player Player => player;
     public List<Enemy> Enemies => enemies;
+
+    public CharacterRegistry()
+    {
+        player = null;
+        enemies = new List<Enemy>();
+    }
 
     public void Register<T>(T entity)
     {

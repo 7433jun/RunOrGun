@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     public float rotateSpeed;
 
+    private CharacterRegistry characterRegistry;
+
     public CharacterController Controller { get; private set; }
     public StateMachine StateMachine { get; private set; }
 
@@ -21,4 +23,8 @@ public class Enemy : MonoBehaviour
         
     }
 
+    public void Initialize(CharacterRegistry registry)
+    {
+        characterRegistry = registry;
+    }
 }

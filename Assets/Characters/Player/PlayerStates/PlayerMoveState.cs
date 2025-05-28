@@ -18,7 +18,7 @@ public class PlayerMoveState : IROGState
     {
         if (player.MoveInput == Vector2.zero)
         {
-            if (CharacterRegistry.Instance.Enemies.Count == 0)
+            if (player.characterRegistry.Enemies.Count == 0)
             {
                 player.StateMachine.ChangeState(player.PlayerIdleState);
             }

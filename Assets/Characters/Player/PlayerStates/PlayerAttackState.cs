@@ -22,7 +22,7 @@ public class PlayerAttackState : IROGState
             return;
         }
 
-        Enemy enemy = ROGUtility.GetClosestEnemy(CharacterRegistry.Instance.Player, CharacterRegistry.Instance.Enemies);
+        Enemy enemy = ROGUtility.GetClosestEnemy(player, player.characterRegistry.Enemies);
 
         if (enemy == null)
         {
