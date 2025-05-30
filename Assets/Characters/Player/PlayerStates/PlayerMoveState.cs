@@ -29,6 +29,7 @@ public class PlayerMoveState : IROGState
 
             return;
         }
+        // DieState 넘길 조건 추가
 
         player.Movement.Move(player.MoveInput);
     }

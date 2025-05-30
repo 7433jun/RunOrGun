@@ -23,7 +23,8 @@ public class CharacterRegistry
         }
         if (entity is Enemy e)
         {
-            enemies.Add(e);
+            if (!enemies.Contains(e))
+                enemies.Add(e);
         }
     }
 

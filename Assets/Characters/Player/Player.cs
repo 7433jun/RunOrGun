@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
 
     public CharacterRegistry characterRegistry;
-    public WeaponDefinition currentWeapon;
+    public WeaponAvatarDefinition currentWeaponAvatar;
     private PlayerStats playerStats;
 
     public StateMachine StateMachine { get; private set; }
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        // 로비씬에서 받아와서 적용시키기 지금은 임시 적용
         playerStats = new();
 
         playerStats.Movement.moveSpeed = 1f;
@@ -58,9 +59,9 @@ public class Player : MonoBehaviour
         playerStats.Projectile.bounceEnemy = 0;
         playerStats.Projectile.pierceEnemy = 0;
 
-        Visual.Initialize(currentWeapon);
+        Visual.Initialize(currentWeaponAvatar);
         Movement.Initialize(playerStats);
-        Combat.Initialize(currentWeapon, playerStats);
+        Combat.Initialize(currentWeaponAvatar, playerStats);
 
         StateMachine = new StateMachine();
         PlayerStartState = new PlayerSpawnState(this);

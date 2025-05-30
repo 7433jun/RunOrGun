@@ -16,18 +16,17 @@ public class PlaySceneCamera : MonoBehaviour
 
     void Update()
     {
-        if (target != null)
-        {
-            float distance = (camHight - target.position.y) / camForward.y;
-            Vector3 offset = camForward * distance;
+        if (target == null) return;
 
-            Vector3 camPos = target.position + offset;
-            camPos.x = 0;
-            transform.position = camPos;
-        }
+        float distance = (camHight - target.position.y) / camForward.y;
+        Vector3 offset = camForward * distance;
+
+        Vector3 camPos = target.position + offset;
+        camPos.x = 0;
+        transform.position = camPos;
     }
 
-    public void SetTarget(Transform targetTransform)
+    public void Initialize(Transform targetTransform)
     {
         target = targetTransform;
     }

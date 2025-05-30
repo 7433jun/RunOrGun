@@ -29,6 +29,7 @@ public class PlayerAttackState : IROGState
             player.StateMachine.ChangeState(player.PlayerIdleState);
             return;
         }
+        // DieState 넘길 조건 추가
 
         Vector3 dir = enemy.transform.position - player.transform.position;
         player.Movement.RotateTowards(dir);

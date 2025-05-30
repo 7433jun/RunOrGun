@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class PlayerProjectile : MonoBehaviour
 {
     private GameObject model;
 
@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
 
     private float lifeTimer;
 
-    public void Initilize(WeaponDefinition weaponDefinition, PlayerProjectileStats projectileStats)
+    public void Initilize(WeaponAvatarDefinition weaponDefinition, PlayerProjectileStats projectileStats)
     {
         CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
         capsuleCollider.radius = weaponDefinition.projectileData.colliderRadius;

@@ -11,7 +11,7 @@ public class PlayerSpawnState : IROGState
 
     public void OnEnter()
     {
-
+        player.characterRegistry.Register(player);
 
         player.StateMachine.ChangeState(player.PlayerIdleState);
     }

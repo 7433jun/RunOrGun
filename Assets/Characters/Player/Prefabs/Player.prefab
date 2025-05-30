@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fe6cc3a9c907a4ead075995015683f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 11400000, guid: ae9e9164b89a2ee44b554d66cb611587, type: 2}
+  currentWeaponAvatar: {fileID: 11400000, guid: 3c4fcbec3998d3d4081cfa7131742de3, type: 2}
 --- !u!114 &1163635752444253792
 MonoBehaviour:
   m_ObjectHideFlags: 0

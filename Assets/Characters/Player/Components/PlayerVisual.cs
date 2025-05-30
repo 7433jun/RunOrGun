@@ -1,10 +1,11 @@
 using UnityEngine;
 
+// 플레이어 모델 배치하는 컴포넌트
 public class PlayerVisual : MonoBehaviour
 {
     private GameObject currentModel;
 
-    public void Initialize(WeaponDefinition weaponDefinition)
+    public void Initialize(WeaponAvatarDefinition weaponDefinition)
     {
         if (currentModel != null)
             Destroy(currentModel);

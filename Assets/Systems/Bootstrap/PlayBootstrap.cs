@@ -4,10 +4,13 @@ public class PlayBootstrap : MonoBehaviour
 {
     [SerializeField] private PlayContext context;
     [SerializeField] private CharacterSpawner characterSpawner;
-    [SerializeField] private PlaySceneCamera camera;
+    [SerializeField] private PlaySceneCamera playCamera;
 
     public void Compose()
     {
+        // 스포너 초기화(딕셔너리 등록)
+        characterSpawner.Initialize();
+
         // 컨텍스트 초기화
         context.Initialize();
 
@@ -21,9 +24,8 @@ public class PlayBootstrap : MonoBehaviour
             enemy.Initialize(context.CharacterRegistry);
         }
 
-
         // 카메라 초기화
-        
+        playCamera.Initialize(player.transform);
 
 
 

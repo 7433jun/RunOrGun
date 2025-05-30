@@ -4,11 +4,11 @@ public class PlayerCombatHandler : MonoBehaviour
 {
     //[SerializeField] private WeaponDefinition currentWeapon;
 
-    private WeaponDefinition weaponDefinition;
+    private WeaponAvatarDefinition weaponDefinition;
     private PlayerStats stats;
 
 
-    public void Initialize(WeaponDefinition weaponDefinition, PlayerStats stats)
+    public void Initialize(WeaponAvatarDefinition weaponDefinition, PlayerStats stats)
     {
         this.weaponDefinition = weaponDefinition;
         this.stats = stats;
@@ -30,7 +30,7 @@ public class PlayerCombatHandler : MonoBehaviour
 
         GameObject projectileObj = Instantiate(weaponDefinition.projectileData.prefab, projectileSpawnPos, rotation);
 
-        var projectile = projectileObj.GetComponent<Projectile>();
+        var projectile = projectileObj.GetComponent<PlayerProjectile>();
         projectile.Initilize(weaponDefinition, stats.Projectile);
 
         //float dist = Vector3.Distance(transform.position, enemy.transform.position);

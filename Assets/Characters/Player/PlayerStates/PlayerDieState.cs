@@ -11,7 +11,8 @@ public class PlayerDieState : IROGState
 
     public void OnEnter()
     {
-        // 죽었을때 결과화면 호출할것 같은곳
+        player.characterRegistry.Unregister(player);
+
         player.gameObject.SetActive(false);
     }
 

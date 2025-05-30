@@ -26,6 +26,9 @@ public class PlayerIdleState : IROGState
             player.StateMachine.ChangeState(player.PlayerAttackState);
             return;
         }
+
+        Debug.Log(player.characterRegistry.Enemies.Count);
+        // DieState 넘길 조건 추가
     }
 
     public void OnExit()
