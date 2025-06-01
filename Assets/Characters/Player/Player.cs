@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
 
     public CharacterRegistry characterRegistry;
-    public WeaponAvatarDefinition currentWeaponAvatar;
+
+
+    public PlayerDefinition playerDefinition;
     private PlayerStats playerStats;
 
     public StateMachine StateMachine { get; private set; }
@@ -59,9 +61,9 @@ public class Player : MonoBehaviour
         playerStats.Projectile.bounceEnemy = 0;
         playerStats.Projectile.pierceEnemy = 0;
 
-        Visual.Initialize(currentWeaponAvatar);
+        Visual.Initialize(playerDefinition);
         Movement.Initialize(playerStats);
-        Combat.Initialize(currentWeaponAvatar, playerStats);
+        Combat.Initialize(playerDefinition, playerStats);
 
         StateMachine = new StateMachine();
         PlayerStartState = new PlayerSpawnState(this);

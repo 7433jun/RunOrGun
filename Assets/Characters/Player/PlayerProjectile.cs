@@ -13,7 +13,7 @@ public class PlayerProjectile : MonoBehaviour
 
     private float lifeTimer;
 
-    public void Initilize(WeaponAvatarDefinition weaponDefinition, PlayerProjectileStats projectileStats)
+    public void Initilize(PlayerDefinition weaponDefinition, PlayerProjectileStats projectileStats)
     {
         CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
         capsuleCollider.radius = weaponDefinition.projectileData.colliderRadius;

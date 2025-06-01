@@ -4,11 +4,11 @@ public class PlayerCombatHandler : MonoBehaviour
 {
     //[SerializeField] private WeaponDefinition currentWeapon;
 
-    private WeaponAvatarDefinition weaponDefinition;
+    private PlayerDefinition weaponDefinition;
     private PlayerStats stats;
 
 
-    public void Initialize(WeaponAvatarDefinition weaponDefinition, PlayerStats stats)
+    public void Initialize(PlayerDefinition weaponDefinition, PlayerStats stats)
     {
         this.weaponDefinition = weaponDefinition;
         this.stats = stats;

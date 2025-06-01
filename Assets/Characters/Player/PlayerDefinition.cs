@@ -1,10 +1,24 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponDefinition", menuName = "Scriptable Objects/WeaponDefinition")]
-public class WeaponAvatarDefinition : ScriptableObject
+[CreateAssetMenu(fileName = "PlayerDefinition", menuName = "Scriptable Objects/PlayerDefinition")]
+public class PlayerDefinition : ScriptableObject
 {
-    public string weaponId;
+    public int playerCharacterId;
+    public string playerCharacterName;
+
+    // 리소스 (모델, 애니메이션, 사운드)
+    // 스탯은 로비에서 받아온 스탯 적용(없음)
+    // 비헤이비어
+
+    public PlayerResourceSO playerResourceSO;
+
+
+
+
+
+
+
     public WeaponModel weaponModel;
     public ProjectileModel projectileModel;
     public ProjectileData projectileData;

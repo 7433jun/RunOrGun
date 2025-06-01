@@ -5,7 +5,7 @@ public class PlayerVisual : MonoBehaviour
 {
     private GameObject currentModel;
 
-    public void Initialize(WeaponAvatarDefinition weaponDefinition)
+    public void Initialize(PlayerDefinition weaponDefinition)
     {
         if (currentModel != null)
             Destroy(currentModel);

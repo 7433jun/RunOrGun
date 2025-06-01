@@ -9,6 +9,8 @@ public class EnemyDefinition : ScriptableObject
     public EnemyModel enemyModel;
     public EnemyProjectileModel enemyProjectileModel;
     public EnemyProjectileData enemyProjectileData;
+
+    public TestInterface testInterface;
 }
 
 [Serializable]
@@ -36,3 +38,6 @@ public class EnemyProjectileData
     public float colliderRadius;
     public float colliderHeight;
 }
+
+public interface TestInterface
+{ }
