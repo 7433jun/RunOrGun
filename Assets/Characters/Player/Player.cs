@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public CharacterRegistry characterRegistry;
 
 
-    public PlayerDefinition playerDefinition;
+    public PlayerDefinitionSO playerDefinition;
     private PlayerStats playerStats;
 
     public StateMachine StateMachine { get; private set; }
@@ -61,9 +61,9 @@ public class Player : MonoBehaviour
         playerStats.Projectile.bounceEnemy = 0;
         playerStats.Projectile.pierceEnemy = 0;
 
-        Visual.Initialize(playerDefinition);
+        Visual.Initialize(playerDefinition.ResourceSO);
         Movement.Initialize(playerStats);
-        Combat.Initialize(playerDefinition, playerStats);
+        Combat.Initialize(playerDefinition.ResourceSO, playerStats);
 
         StateMachine = new StateMachine();
         PlayerStartState = new PlayerSpawnState(this);

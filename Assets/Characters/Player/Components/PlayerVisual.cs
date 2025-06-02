@@ -5,14 +5,14 @@ public class PlayerVisual : MonoBehaviour
 {
     private GameObject currentModel;
 
-    public void Initialize(PlayerDefinition weaponDefinition)
+    public void Initialize(PlayerResourceSO resource)
     {
         if (currentModel != null)
             Destroy(currentModel);
-
-        currentModel = Instantiate(weaponDefinition.weaponModel.prefab, transform);
-        currentModel.transform.position = weaponDefinition.weaponModel.pos;
-        currentModel.transform.rotation = Quaternion.Euler(weaponDefinition.weaponModel.rot);
-        currentModel.transform.localScale = weaponDefinition.weaponModel.scale;
+        
+        currentModel = Instantiate(resource.PlayerModel.Prefab, transform);
+        currentModel.transform.position = resource.PlayerModel.Pos;
+        currentModel.transform.rotation = Quaternion.Euler(resource.PlayerModel.Rot);
+        currentModel.transform.localScale = resource.PlayerModel.Scale;
     }
 }

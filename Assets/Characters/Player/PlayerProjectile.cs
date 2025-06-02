@@ -13,17 +13,20 @@ public class PlayerProjectile : MonoBehaviour
 
     private float lifeTimer;
 
-    public void Initilize(PlayerDefinition weaponDefinition, PlayerProjectileStats projectileStats)
+    public void Initilize(PlayerResourceSO resource, PlayerProjectileStats projectileStats)
     {
+        // 모델의 정의된 콜라이더 크기로 조절
         CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
-        capsuleCollider.radius = weaponDefinition.projectileData.colliderRadius;
-        capsuleCollider.height = weaponDefinition.projectileData.colliderHeight;
+        capsuleCollider.radius = resource.ProjectileData.ColliderRadius;
+        capsuleCollider.height = resource.ProjectileData.ColliderHeight;
 
-        model = Instantiate(weaponDefinition.projectileModel.prefab, transform);
-        model.transform.localPosition = weaponDefinition.projectileModel.pos;
-        model.transform.localRotation = Quaternion.Euler(weaponDefinition.projectileModel.rot);
-        model.transform.localScale = weaponDefinition.projectileModel.scale;
+        // 하위에 모델 프리팹 생성, 위치 조정
+        model = Instantiate(resource.ProjectileModel.Prefab, transform);
+        model.transform.localPosition = resource.ProjectileModel.Pos;
+        model.transform.localRotation = Quaternion.Euler(resource.ProjectileModel.Rot);
+        model.transform.localScale = resource.ProjectileModel.Scale;
 
+        // 투사체 스탯값 기입
         this.sizeRate = projectileStats.sizeRate;
         this.speed = projectileStats.speed * projectileStats.speedRate;
         this.lifeTime = projectileStats.lifeTime * projectileStats.lifeTimeRate;
