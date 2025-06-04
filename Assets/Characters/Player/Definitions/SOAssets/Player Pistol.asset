@@ -15,4 +15,4 @@ MonoBehaviour:
   playerCharacterId: 1
   playerCharacterName: Test Pistol
   playerResourceSO: {fileID: 11400000, guid: a467aa6aa13d71140872e4e0f3df9d5c, type: 2}
-  playerBehaviourSO: {fileID: 0}
+  playerBehaviourSO: {fileID: 11400000, guid: 9decc70be6470bc4c943be4cd7a6bab1, type: 2}

@@ -3,19 +3,30 @@ using UnityEngine;
 public class PlayerMoveState : IROGState
 {
     private Player player;
+    private PlayerMoveBehaviorSO moveSO;
+    private Transform playerTransform;
+    private CharacterController playerController;
+    private PlayerMovementStats movementStats;
 
     public PlayerMoveState(Player player)
     {
         this.player = player;
+        moveSO = player.playerDefinition.BehaviorSO.MoveSO;
+        playerTransform = player.transform;
+        playerController = player.GetComponent<CharacterController>();
+        movementStats = player.playerStats.Movement;
     }
 
     public void OnEnter()
     {
-        Debug.Log("Player Move");
+        //Debug.Log("Player Move");
+        moveSO.OnEnter();
     }
 
     public void OnUpdate()
     {
+        // 상태 전이 조건은 상태머신 자체에서 체크
+        // 상태 전이 조건도 개별로 구성할 필요가 있을지도?
         if (player.MoveInput == Vector2.zero)
         {
             if (player.characterRegistry.Enemies.Count == 0)
@@ -31,11 +42,16 @@ public class PlayerMoveState : IROGState
         }
         // DieState 넘길 조건 추가
 
-        player.Movement.Move(player.MoveInput);
+
+
+
+        //player.Movement.Move(player.MoveInput);
+
+        moveSO.OnUpdate(player.MoveInput, playerTransform, playerController, movementStats);
     }
 
     public void OnExit()
     {
-
+        moveSO.OnExit();
     }
 }

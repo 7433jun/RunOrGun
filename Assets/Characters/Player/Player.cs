@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
 
     public PlayerDefinitionSO playerDefinition;
-    private PlayerStats playerStats;
+    public PlayerStats playerStats;
 
     public StateMachine StateMachine { get; private set; }
     public IROGState PlayerStartState { get; private set; }
