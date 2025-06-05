@@ -19,13 +19,11 @@ public class Player : MonoBehaviour
     public IROGState PlayerDieState { get; private set; }
 
     public PlayerVisual Visual { get; private set; }
-    public PlayerMovementHandler Movement { get; private set; }
     public PlayerCombatHandler Combat { get; private set; }
 
     void Awake()
     {
         Visual = GetComponent<PlayerVisual>();
-        Movement = GetComponent<PlayerMovementHandler>();
         Combat = GetComponent<PlayerCombatHandler>();
     }
 
@@ -62,7 +60,11 @@ public class Player : MonoBehaviour
         playerStats.Projectile.pierceEnemy = 0;
 
         Visual.Initialize(playerDefinition.ResourceSO);
-        Movement.Initialize(playerStats);
+
+        // movement
+        GetComponent<CharacterController>().skinWidth = 0.001f;
+
+        // combat
         Combat.Initialize(playerDefinition.ResourceSO, playerStats);
 
         StateMachine = new StateMachine();

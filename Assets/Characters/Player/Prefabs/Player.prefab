@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 4787006264975437905}
   - component: {fileID: 3795280214294718639}
   - component: {fileID: 1163635752444253792}
-  - component: {fileID: 5834642155856205056}
   - component: {fileID: 240621106756410563}
   m_Layer: 0
   m_Name: Player
@@ -192,6 +191,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDefinition: {fileID: 11400000, guid: bf7ba889a5006e64a8f828554f7a73bd, type: 2}
+  playerStats:
+    Movement:
+      moveSpeed: 0
+      rotateSpeed: 0
+      sizeRate: 0
+    Attack:
+      power: 0
+      powerRate: 0
+      range: 0
+      rangeRate: 0
+      cooldown: 0
+      cooldownRate: 0
+      angle: 0
+      angleRate: 0
+      projectileCount: 0
+    Magazine:
+      size: 0
+      reloadCooldown: 0
+      reloadCooldownRate: 0
+    Projectile:
+      sizeRate: 0
+      speed: 0
+      speedRate: 0
+      lifeTime: 0
+      lifeTimeRate: 0
+      bounceWall: 0
+      bounceEnemy: 0
+      pierceEnemy: 0
 --- !u!114 &1163635752444253792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,18 +229,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfc7e66e00946ec4dae2cb6ca5e4001f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5834642155856205056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7007315721487233964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7adc4d6fb0f643a41818afe243a91192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &240621106756410563

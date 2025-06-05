@@ -11,7 +11,7 @@ public class PlayerMoveState : IROGState
     public PlayerMoveState(Player player)
     {
         this.player = player;
-        moveSO = player.playerDefinition.BehaviorSO.MoveSO;
+        moveSO = player.playerDefinition.MoveSO;
         playerTransform = player.transform;
         playerController = player.GetComponent<CharacterController>();
         movementStats = player.playerStats.Movement;
@@ -20,7 +20,8 @@ public class PlayerMoveState : IROGState
     public void OnEnter()
     {
         //Debug.Log("Player Move");
-        moveSO.OnEnter();
+        var ctx = CreatePlayerMoveContext();
+        moveSO.EnterBehavior(ctx);
     }
 
     public void OnUpdate()
@@ -46,12 +47,23 @@ public class PlayerMoveState : IROGState
 
 
         //player.Movement.Move(player.MoveInput);
-
-        moveSO.OnUpdate(player.MoveInput, playerTransform, playerController, movementStats);
+        var ctx = CreatePlayerMoveContext();
+        moveSO.Move(ctx);
     }
 
     public void OnExit()
     {
-        moveSO.OnExit();
+        var ctx = CreatePlayerMoveContext();
+        moveSO.ExitBehavior(ctx);
+    }
+
+    private PlayerMoveContext CreatePlayerMoveContext()
+    {
+        return new PlayerMoveContext(
+            player.MoveInput,
+            playerTransform,
+            playerController,
+            movementStats
+            );
     }
 }

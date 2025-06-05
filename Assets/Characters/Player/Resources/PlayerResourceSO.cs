@@ -11,6 +11,9 @@ public class PlayerResourceSO : ScriptableObject
     public PlayerModel PlayerModel => playerModel;
     public ProjectileModel ProjectileModel => projectileModel;
     public ProjectileData ProjectileData => projectileData;
+
+
+    // 모델 데이터뿐아니라 애니메이션, 사운드, 이펙트 다 있어야됨
 }
 
 [Serializable]
