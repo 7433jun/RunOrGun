@@ -2,7 +2,8 @@ using UnityEngine;
 
 public abstract class PlayerAttackBehaviorSO : ScriptableObject
 {
-    public abstract void EnterBehavior(PlayerAttackContext ctx);
-    public abstract void Attack(PlayerAttackContext ctx);
-    public abstract void ExitBehavior(PlayerAttackContext ctx);
+    public abstract void InitBehavior(Player player);
+    public abstract void EnterBehavior();
+    public abstract void Attack();
+    public abstract void ExitBehavior();
 }

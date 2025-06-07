@@ -19,12 +19,10 @@ public class Player : MonoBehaviour
     public IROGState PlayerDieState { get; private set; }
 
     public PlayerVisual Visual { get; private set; }
-    public PlayerCombatHandler Combat { get; private set; }
 
     void Awake()
     {
         Visual = GetComponent<PlayerVisual>();
-        Combat = GetComponent<PlayerCombatHandler>();
     }
 
     void Start()
@@ -63,9 +61,6 @@ public class Player : MonoBehaviour
 
         // movement
         GetComponent<CharacterController>().skinWidth = 0.001f;
-
-        // combat
-        Combat.Initialize(playerDefinition.ResourceSO, playerStats);
 
         StateMachine = new StateMachine();
         PlayerStartState = new PlayerSpawnState(this);
