@@ -14,8 +14,9 @@ public class PlayBootstrap : MonoBehaviour
         // 컨텍스트 초기화
         context.Initialize();
 
-        // 플레이어 생성, 주입
+        // 플레이어 생성, 등록, 주입
         var player = characterSpawner.SpawnPlayer();
+        context.CharacterRegistry.Register(player);
         player.Initialize(context.CharacterRegistry);
 
         // 적 생성, 주입

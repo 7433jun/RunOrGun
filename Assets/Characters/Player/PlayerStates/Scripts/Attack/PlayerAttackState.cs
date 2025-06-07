@@ -5,7 +5,6 @@ public class PlayerAttackState : IROGState
 {
     private Player player;
     private PlayerAttackBehaviorSO attackSO;
-    private Enemy targetEnemy;
 
     public PlayerAttackState(Player player)
     {
@@ -36,7 +35,7 @@ public class PlayerAttackState : IROGState
         }
         // DieState 넘길 조건 추가
 
-        attackSO.Attack();
+        attackSO.UpdateBehavior();
     }
 
     public void OnExit()

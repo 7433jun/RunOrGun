@@ -3,15 +3,20 @@ using UnityEngine;
 public class PlayerIdleState : IROGState
 {
     private Player player;
+    private PlayerIdleBehaviorSO idleSO;
 
     public PlayerIdleState(Player player)
     {
         this.player = player;
+        idleSO = Object.Instantiate(player.playerDefinition.IdleSO);
+        idleSO.InitBehavior(player);
     }
 
     public void OnEnter()
     {
         //Debug.Log("Player Idle");
+
+        idleSO.EnterBehavior();
     }
 
     public void OnUpdate()
@@ -26,13 +31,15 @@ public class PlayerIdleState : IROGState
             player.StateMachine.ChangeState(player.PlayerAttackState);
             return;
         }
-
-        Debug.Log(player.characterRegistry.Enemies.Count);
         // DieState 넘길 조건 추가
+
+        idleSO.UpdateBehavior();
     }
 
     public void OnExit()
     {
 
+
+        idleSO.ExitBehavior();
     }
 }

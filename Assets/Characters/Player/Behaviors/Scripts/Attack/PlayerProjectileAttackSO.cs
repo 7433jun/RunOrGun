@@ -26,7 +26,7 @@ public class PlayerProjectileAttackSO : PlayerAttackBehaviorSO
         
     }
 
-    public override void Attack()
+    public override void UpdateBehavior()
     {
         // Àû °¨Áö
         Enemy targetEnemy = ROGUtility.GetClosestEnemy(player, player.characterRegistry.Enemies);

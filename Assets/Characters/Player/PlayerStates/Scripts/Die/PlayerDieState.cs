@@ -3,26 +3,33 @@ using UnityEngine;
 public class PlayerDieState : IROGState
 {
     private Player player;
+    private PlayerDieBehaviorSO dieSO;
 
     public PlayerDieState(Player player)
     {
         this.player = player;
+        dieSO = Object.Instantiate(player.playerDefinition.DieSO);
+        dieSO.InitBehavior(player);
     }
 
     public void OnEnter()
     {
-        player.characterRegistry.Unregister(player);
 
-        player.gameObject.SetActive(false);
+
+        dieSO.EnterBehavior();
     }
 
     public void OnUpdate()
     {
-        
+
+
+        dieSO.UpdateBehavior();
     }
 
     public void OnExit()
     {
-        
+
+
+        dieSO.ExitBehavior();
     }
 }

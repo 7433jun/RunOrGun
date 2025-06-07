@@ -37,7 +37,7 @@ public class PlayerMoveState : IROGState
         // DieState 넘길 조건 추가
 
 
-        moveSO.Move();
+        moveSO.UpdateBehavior();
     }
 
     public void OnExit()

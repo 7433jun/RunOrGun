@@ -23,7 +23,7 @@ public class PlayerInputMoveSO : PlayerMoveBehaviorSO
         // 시작시 초기화 할거 세팅
     }
 
-    public override void Move()
+    public override void UpdateBehavior()
     {
         // 방향
         Vector3 dir = new Vector3(player.MoveInput.x, 0f, player.MoveInput.y);

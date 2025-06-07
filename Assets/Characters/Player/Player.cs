@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public PlayerStats playerStats;
 
     public StateMachine StateMachine { get; private set; }
-    public IROGState PlayerStartState { get; private set; }
+    public IROGState PlayerSpawnState { get; private set; }
     public IROGState PlayerIdleState { get; private set; }
     public IROGState PlayerMoveState { get; private set; }
     public IROGState PlayerAttackState { get; private set; }
@@ -63,12 +63,12 @@ public class Player : MonoBehaviour
         GetComponent<CharacterController>().skinWidth = 0.001f;
 
         StateMachine = new StateMachine();
-        PlayerStartState = new PlayerSpawnState(this);
+        PlayerSpawnState = new PlayerSpawnState(this);
         PlayerIdleState = new PlayerIdleState(this);
         PlayerMoveState = new PlayerMoveState(this);
         PlayerAttackState = new PlayerAttackState(this);
         PlayerDieState = new PlayerDieState(this);
-        StateMachine.ChangeState(PlayerStartState);
+        StateMachine.ChangeState(PlayerSpawnState);
     }
 
     void Update()
