@@ -8,12 +8,13 @@ public class PlayerSpawnState : IROGState
     public PlayerSpawnState(Player player)
     {
         this.player = player;
-        spawnSO = Object.Instantiate(player.playerDefinition.SpawnSO);
+        spawnSO = Object.Instantiate(player.DefinitionSO.SpawnSO);
         spawnSO.InitBehavior(player);
     }
 
     public void OnEnter()
     {
+
 
         spawnSO.EnterBehavior();
     }

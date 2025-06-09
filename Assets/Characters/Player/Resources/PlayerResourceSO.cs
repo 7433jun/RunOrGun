@@ -4,20 +4,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerResourceSO", menuName = "Scriptable Objects/Player/PlayerResourceSO")]
 public class PlayerResourceSO : ScriptableObject
 {
-    [SerializeField] private PlayerModel playerModel;
-    [SerializeField] private ProjectileModel projectileModel;
-    [SerializeField] private ProjectileData projectileData;
+    [SerializeField] private PModel playerModel;
+    [SerializeField] private PProjectileModel projectileModel;
+    [SerializeField] private PProjectileData projectileData;
 
-    public PlayerModel PlayerModel => playerModel;
-    public ProjectileModel ProjectileModel => projectileModel;
-    public ProjectileData ProjectileData => projectileData;
+    public PModel PlayerModel => playerModel;
+    public PProjectileModel ProjectileModel => projectileModel;
+    public PProjectileData ProjectileData => projectileData;
 
 
     // 모델 데이터뿐아니라 애니메이션, 사운드, 이펙트 다 있어야됨
 }
 
 [Serializable]
-public class PlayerModel
+public class PModel
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private Vector3 pos;
@@ -33,7 +33,7 @@ public class PlayerModel
 }
 
 [Serializable]
-public class ProjectileModel
+public class PProjectileModel
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private Vector3 pos;
@@ -47,7 +47,7 @@ public class ProjectileModel
 }
 
 [Serializable]
-public class ProjectileData
+public class PProjectileData
 {
     // 이거 기본 투사체 프리팹인데 다른곳에 구성해야지 아니다 아닌가? 투사체의 로직은 하나니까 굳이 여러 로직을 염두해 두고 만들어야할까?
     // 어딘가 기본 투사체 프리팹, 빔 프리팹, 근접 프리팹 두는게 맞으려나?

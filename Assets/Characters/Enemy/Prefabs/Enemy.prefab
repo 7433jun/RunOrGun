@@ -185,8 +185,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3946f53b909aaad46be7ae0eb7a99737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  rotateSpeed: 0
+  enemyDefinition: {fileID: 11400000, guid: 17a31c0e2e8380d40baa735874335a97, type: 2}
+  enemyStats:
+    Movement:
+      moveSpeed: 0
+      rotateSpeed: 0
+      sizeRate: 0
 --- !u!114 &8918896370385846677
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,9 +19,10 @@ public class PlayBootstrap : MonoBehaviour
         context.CharacterRegistry.Register(player);
         player.Initialize(context.CharacterRegistry);
 
-        // 利 积己, 林涝
+        // 利 积己, 殿废, 林涝
         foreach (var enemy in characterSpawner.SpawnEnemy())
         {
+            context.CharacterRegistry.Register(enemy);
             enemy.Initialize(context.CharacterRegistry);
         }
 

@@ -3,7 +3,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public CharacterRegistry characterRegistry;
-    private EnemyStats enemyStats;
+
+    private EnemyDefinitionSO enemyDefinitionSO;
+    public EnemyStats enemyStats;
+
+    public EnemyDefinitionSO DefinitionSO => enemyDefinitionSO;
 
     public StateMachine StateMachine { get; private set; }
     public IROGState EnemySpawnState { get; private set; }
@@ -13,14 +17,10 @@ public class Enemy : MonoBehaviour
     public IROGState EnemyDieState { get; private set; }
 
     public EnemyVisual Visual { get; private set; }
-    public EnemyMovementHandler Movement { get; private set; }
-    public EnemyCombatHandler Combat { get; private set; }
 
     void Awake()
     {
         Visual = GetComponent<EnemyVisual>();
-        Movement = GetComponent<EnemyMovementHandler>();
-        Combat = GetComponent<EnemyCombatHandler>();
     }
 
     void Start()
@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
         enemyStats.Movement.moveSpeed = 0.5f;
         enemyStats.Movement.rotateSpeed = 30f;
         enemyStats.Movement.sizeRate = 1f;
+
+        Visual.Initialize(DefinitionSO.ResourceSO);
 
         StateMachine = new StateMachine();
         EnemySpawnState = new EnemySpawnState(this);
@@ -44,6 +46,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         StateMachine.Update();
+    }
+
+    public void SetDefinition(EnemyDefinitionSO definitionSO)
+    {
+        enemyDefinitionSO = definitionSO;
     }
 
     public void Initialize(CharacterRegistry registry)

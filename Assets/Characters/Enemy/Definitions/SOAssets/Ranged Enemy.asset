@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e847285008ecd488c5f55a304480be, type: 3}
+  m_Name: Ranged Enemy
+  m_EditorClassIdentifier: 
+  enemyCharacterId: 11
+  enemyCharacterName: Test Ranged Enemy
+  enemyResourceSO: {fileID: 11400000, guid: 4840b87945736914398d05e07ca2dc6e, type: 2}
+  enemySpawnBehaviorSO: {fileID: 11400000, guid: 19c477908e1ec29449c776c1f6dff8a0, type: 2}
+  enemyIdleBehaviorSO: {fileID: 11400000, guid: 14387e657d0aae544887bc0ffe3613d3, type: 2}
+  enemyMoveBehaviorSO: {fileID: 11400000, guid: e3437785655bc0646a459b08d7a556f8, type: 2}
+  enemyAttackBehaviorSO: {fileID: 11400000, guid: 26710984d81c4024e9cf43c870f5f7ab, type: 2}
+  enemyDieBehaviorSO: {fileID: 11400000, guid: a6e4a0a25e9beca4c8c98fbcc69c8526, type: 2}

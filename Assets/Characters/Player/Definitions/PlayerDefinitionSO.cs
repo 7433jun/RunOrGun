@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerDefinitionSO", menuName = "Scriptable Objects/PlayerDefinitionSO")]
+[CreateAssetMenu(fileName = "PlayerDefinitionSO", menuName = "Scriptable Objects/Player/PlayerDefinitionSO")]
 public class PlayerDefinitionSO : ScriptableObject
 {
     [SerializeField] private int playerCharacterId;

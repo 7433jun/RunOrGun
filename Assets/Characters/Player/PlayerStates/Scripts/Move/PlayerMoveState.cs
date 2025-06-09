@@ -8,7 +8,7 @@ public class PlayerMoveState : IROGState
     public PlayerMoveState(Player player)
     {
         this.player = player;
-        moveSO = Object.Instantiate(player.playerDefinition.MoveSO);
+        moveSO = Object.Instantiate(player.DefinitionSO.MoveSO);
         moveSO.InitBehavior(player);
     }
 

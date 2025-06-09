@@ -8,7 +8,7 @@ public class PlayerIdleState : IROGState
     public PlayerIdleState(Player player)
     {
         this.player = player;
-        idleSO = Object.Instantiate(player.playerDefinition.IdleSO);
+        idleSO = Object.Instantiate(player.DefinitionSO.IdleSO);
         idleSO.InitBehavior(player);
     }
 

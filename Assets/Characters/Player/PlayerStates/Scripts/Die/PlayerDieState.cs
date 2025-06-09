@@ -8,7 +8,7 @@ public class PlayerDieState : IROGState
     public PlayerDieState(Player player)
     {
         this.player = player;
-        dieSO = Object.Instantiate(player.playerDefinition.DieSO);
+        dieSO = Object.Instantiate(player.DefinitionSO.DieSO);
         dieSO.InitBehavior(player);
     }
 

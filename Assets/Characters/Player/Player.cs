@@ -8,8 +8,13 @@ public class Player : MonoBehaviour
     public CharacterRegistry characterRegistry;
 
 
-    public PlayerDefinitionSO playerDefinition;
+    private PlayerDefinitionSO playerDefinitionSO;
     public PlayerStats playerStats;
+
+
+
+    public PlayerDefinitionSO DefinitionSO => playerDefinitionSO;
+
 
     public StateMachine StateMachine { get; private set; }
     public IROGState PlayerSpawnState { get; private set; }
@@ -57,7 +62,7 @@ public class Player : MonoBehaviour
         playerStats.Projectile.bounceEnemy = 0;
         playerStats.Projectile.pierceEnemy = 0;
 
-        Visual.Initialize(playerDefinition.ResourceSO);
+        Visual.Initialize(DefinitionSO.ResourceSO);
 
         // movement
         GetComponent<CharacterController>().skinWidth = 0.001f;
@@ -74,6 +79,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         StateMachine.Update();
+    }
+
+    public void SetDefinition(PlayerDefinitionSO definitionSO)
+    {
+        playerDefinitionSO = definitionSO;
     }
 
     public void Initialize(CharacterRegistry registry)

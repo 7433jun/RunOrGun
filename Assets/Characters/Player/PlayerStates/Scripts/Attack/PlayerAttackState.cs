@@ -9,7 +9,7 @@ public class PlayerAttackState : IROGState
     public PlayerAttackState(Player player)
     {
         this.player = player;
-        attackSO = Object.Instantiate(player.playerDefinition.AttackSO);
+        attackSO = Object.Instantiate(player.DefinitionSO.AttackSO);
         attackSO.InitBehavior(player);
     }
 
