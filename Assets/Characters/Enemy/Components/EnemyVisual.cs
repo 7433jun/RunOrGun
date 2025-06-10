@@ -4,7 +4,7 @@ public class EnemyVisual : MonoBehaviour
 {
     private GameObject currentModel;
 
-    public void Initialize(EnemyResourceSO resource)
+    public void Initialize()
     {
 
     }

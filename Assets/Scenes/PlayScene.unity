@@ -2973,23 +2973,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8fc93f2f50c6e4b8eef26af7b10212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7007315721487233964, guid: bba565324b255e845bbb9dbc94aed281, type: 3}
-  enemyPrefab: {fileID: 3104057166190887914, guid: 4d7a287c805566a41a330b6d9af27af9, type: 3}
-  playerDefinitionList:
-  - {fileID: 11400000, guid: bf7ba889a5006e64a8f828554f7a73bd, type: 2}
-  enemyDefinitionList:
-  - {fileID: 11400000, guid: 17a31c0e2e8380d40baa735874335a97, type: 2}
+  playerPrefabList:
+  - {fileID: 1678660331621021996, guid: 070e5639090df7c4782b59ff3aa6821d, type: 3}
+  enemyPrefabList:
+  - {fileID: 6559235856129622025, guid: 015424276ece5f54e9715afa031e4702, type: 3}
   playerSpawnData:
-    playerId: 1
+    id: 1001
     pos: {x: 0, y: 0.2, z: 0}
     rot: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
   enemySpawnDataList:
-  - enemyId: 11
+  - id: 2001
     pos: {x: 0.6, y: 0.2, z: 2}
     rot: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
-  - enemyId: 11
+  - id: 2001
     pos: {x: -0.6, y: 0.2, z: 2}
     rot: {x: 0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}

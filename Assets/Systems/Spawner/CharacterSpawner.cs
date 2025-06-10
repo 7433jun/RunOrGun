@@ -4,42 +4,42 @@ using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject enemyPrefab;
-
-    [SerializeField] private List<PlayerDefinitionSO> playerDefinitionList;
-    [SerializeField] private List<EnemyDefinitionSO> enemyDefinitionList;
+    [SerializeField] private List<GameObject> playerPrefabList;
+    [SerializeField] private List<GameObject> enemyPrefabList;
 
     // 이것들 다 패턴으로 등록하던가 시드에 따른 랜덤생성해야됨 테스트용으로 직접등록함
-    [SerializeField] private PlayerSpawnData playerSpawnData;
-    [SerializeField] private List<EnemySpawnData> enemySpawnDataList;
+    [SerializeField] private SpawnData playerSpawnData;
+    [SerializeField] private List<SpawnData> enemySpawnDataList;
 
-    private Dictionary<int, PlayerDefinitionSO> playerDictionary;
-    private Dictionary<int, EnemyDefinitionSO> enemyDictionary;
+    private Dictionary<int, GameObject> playerDictionary;
+    private Dictionary<int, GameObject> enemyDictionary;
 
     public void Initialize()
     {
         playerDictionary = new();
         enemyDictionary = new();
 
-        foreach (PlayerDefinitionSO playerDefinition in playerDefinitionList)
+        foreach (GameObject playerPrefab in playerPrefabList)
         {
-            playerDictionary.Add(playerDefinition.CharacterID, playerDefinition);
+            int id = playerPrefab.GetComponent<Player>().playerID;
+            playerDictionary.Add(id, playerPrefab);
         }
 
-        foreach (EnemyDefinitionSO enemyDefinition in enemyDefinitionList)
+        foreach (GameObject enemyPrefab in enemyPrefabList)
         {
-            enemyDictionary.Add(enemyDefinition.EnemyID, enemyDefinition);
+            int id = enemyPrefab.GetComponent<Enemy>().enemyID;
+            enemyDictionary.Add(id, enemyPrefab);
         }
     }
 
     public Player SpawnPlayer()
     {
-        GameObject gameObject = Instantiate(playerPrefab, playerSpawnData.pos, Quaternion.Euler(playerSpawnData.rot));
-        gameObject.transform.localScale = playerSpawnData.scale;
+        if (!playerDictionary.ContainsKey(playerSpawnData.id)) return null;
 
-        Player player = gameObject.GetComponent<Player>();
-        player.SetDefinition(playerDictionary[playerSpawnData.playerId]);
+        GameObject playerObj = Instantiate(playerDictionary[playerSpawnData.id], playerSpawnData.pos, Quaternion.Euler(playerSpawnData.rot));
+        playerObj.transform.localScale = playerSpawnData.scale;
+
+        Player player = playerObj.GetComponent<Player>();
 
         return player;
     }
@@ -48,15 +48,14 @@ public class CharacterSpawner : MonoBehaviour
     {
         List<Enemy> list = new();
 
-        foreach (EnemySpawnData data in enemySpawnDataList)
+        foreach (SpawnData data in enemySpawnDataList)
         {
-            if (!enemyDictionary.ContainsKey(data.enemyId)) continue;
+            if (!enemyDictionary.ContainsKey(data.id)) continue;
 
-            GameObject gameObject = Instantiate(enemyPrefab, data.pos, Quaternion.Euler(data.rot));
-            gameObject.transform.localScale = data.scale;
+            GameObject enemyObj = Instantiate(enemyDictionary[data.id], data.pos, Quaternion.Euler(data.rot));
+            enemyObj.transform.localScale = data.scale;
 
-            Enemy enemy = gameObject.GetComponent<Enemy>();
-            enemy.SetDefinition(enemyDictionary[data.enemyId]);
+            Enemy enemy = enemyObj.GetComponent<Enemy>();
 
             list.Add(enemy);
         }
@@ -65,18 +64,9 @@ public class CharacterSpawner : MonoBehaviour
 }
 
 [Serializable]
-public class PlayerSpawnData
+public class SpawnData
 {
-    public int playerId;
-    public Vector3 pos;
-    public Vector3 rot;
-    public Vector3 scale;
-}
-
-[Serializable]
-public class EnemySpawnData
-{
-    public int enemyId;
+    public int id;
     public Vector3 pos;
     public Vector3 rot;
     public Vector3 scale;

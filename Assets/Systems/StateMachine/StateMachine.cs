@@ -1,6 +1,6 @@
 public class StateMachine
 {
-    private IROGState currentState;
+    public IROGState currentState { get; private set; }
 
     public void ChangeState(IROGState newState)
     {
