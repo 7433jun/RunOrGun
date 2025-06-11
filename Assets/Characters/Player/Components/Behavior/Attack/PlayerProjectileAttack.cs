@@ -29,7 +29,6 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
     {
         // 적 감지
         Enemy targetEnemy = ROGUtility.GetClosestEnemy(player, player.characterRegistry.Enemies);
-
         if (targetEnemy == null) return;
 
         // 플레이어 회전
@@ -40,7 +39,7 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
         player.transform.rotation = nextQuat;
 
         // 공격 쿨타임 계산
-        if (Time.time < lastAttackTime + playerStats.Attack.cooldown * playerStats.Attack.cooldownRate) return;
+        if (Time.time < lastAttackTime + playerStats.Attack.attackSpeedCurrent) return;
 
 
 

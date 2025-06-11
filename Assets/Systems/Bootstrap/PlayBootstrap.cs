@@ -17,7 +17,7 @@ public class PlayBootstrap : MonoBehaviour
         // 플레이어 생성, 등록, 주입
         var player = characterSpawner.SpawnPlayer();
         context.CharacterRegistry.Register(player);
-        player.Initialize(context.CharacterRegistry);
+        player.Initialize(context);
 
         // 적 생성, 등록, 주입
         foreach (var enemy in characterSpawner.SpawnEnemy())

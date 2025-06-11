@@ -33,7 +33,7 @@ public class PlayerInputMove : PlayerMoveBehavior
             playerTransform.rotation = nextQuat;
 
             // ¿Ãµø
-            playerController.Move(dir * playerStats.Movement.moveSpeed * Time.deltaTime);
+            playerController.Move(dir * playerStats.Movement.moveSpeedCurrent * Time.deltaTime);
         }
     }
 

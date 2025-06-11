@@ -18,9 +18,9 @@ public class PlayerProjectile : MonoBehaviour
     public void Initilize(PlayerProjectileStats projectileStats)
     {
         // 투사체 스탯값 기입
-        this.sizeRate = projectileStats.sizeRate;
-        this.speed = projectileStats.speed * projectileStats.speedRate;
-        this.lifeTime = projectileStats.lifeTime * projectileStats.lifeTimeRate;
+        this.sizeRate = projectileStats.sizeRatio;
+        this.speed = projectileStats.speed * projectileStats.speedCurrent;
+        this.lifeTime = projectileStats.lifeTime * projectileStats.lifeTimeCurrent;
         bounceWall = projectileStats.bounceWall;
         bounceEnemy = projectileStats.bounceEnemy;
         pierceEnemy = projectileStats.pierceEnemy;
