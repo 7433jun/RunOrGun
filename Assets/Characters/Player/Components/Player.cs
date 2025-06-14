@@ -11,26 +11,33 @@ public class Player : MonoBehaviour
     public CharacterRegistry characterRegistry;
     public PlayEvent playEvent;
 
-    public PlayerStats playerStats;
+    public PlayerStatsSystem statsSystem;
 
     public PlayerVisual Visual { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
 
     void Awake()
     {
+        statsSystem = GetComponent<PlayerStatsSystem>();
         Visual = GetComponent<PlayerVisual>();
         StateMachine = GetComponent<PlayerStateMachine>();
     }
 
     void Start()
     {
+        PlayerStatsDTO dto = new PlayerStatsDTO();
+
+        // 이거 값 넣어야됨
+
+        statsSystem.ApplyStats(dto);
+
         // 로비씬에서 받아와서 적용시키기 지금은 임시 적용
-        playerStats = new();
-
-        playerStats.Movement.moveSpeedBase = 1f;
-        playerStats.Movement.rotateSpeed = 30f;
-        playerStats.Movement.sizeRate = 1f;
-
+        //playerStats = new();
+        //
+        //playerStats.Movement.moveSpeedBase = 1f;
+        //playerStats.Movement.rotateSpeed = 30f;
+        //playerStats.Movement.sizeRate = 1f;
+        //
         //playerStats.Attack.power = 10f;
         //playerStats.Attack.powerRate = 1f;
         //playerStats.Attack.range = 100f;

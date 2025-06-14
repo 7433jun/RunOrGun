@@ -1,21 +1,28 @@
-[System.Serializable]
 public class PlayerStatsDTO
 {
-    public PlayerMovementStatsDTO Movement;
+    public PlayerHealthStatsDTO Health;
+    public PlayerMoveStatsDTO Move;
     public PlayerAttackStatsDTO Attack;
-    public PlayerMagazineStatsDTO Magazine;
+    public PlayerAmmoStatsDTO Ammo;
     public PlayerProjectileStatsDTO Projectile;
 }
 
-[System.Serializable]
-public class PlayerMovementStatsDTO
+public class PlayerHealthStatsDTO
+{
+    public float healthBase;
+    public float healthBonusRaw;
+    public float healthRatioRaw;
+    public float healthHealRatioRaw;
+    public float healthDamageRatioRaw;
+}
+
+public class PlayerMoveStatsDTO
 {
     public float moveSpeed;
     public float rotateSpeed;
     public float sizeRate;
 }
 
-[System.Serializable]
 public class PlayerAttackStatsDTO
 {
     public float power;
@@ -29,15 +36,13 @@ public class PlayerAttackStatsDTO
     public int projectileCount;
 }
 
-[System.Serializable]
-public class PlayerMagazineStatsDTO
+public class PlayerAmmoStatsDTO
 {
     public int size;
     public float reloadCooldown;
     public float reloadCooldownRate;
 }
 
-[System.Serializable]
 public class PlayerProjectileStatsDTO
 {
     public float sizeRate;

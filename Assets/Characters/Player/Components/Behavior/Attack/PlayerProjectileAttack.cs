@@ -17,7 +17,7 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
         this.player = player;
         playerTransform = player.transform;
         playerController = player.GetComponent<CharacterController>();
-        playerStats = player.playerStats;
+        playerStats = player.statsSystem.Stats;
     }
 
     public override void EnterBehavior()
@@ -35,7 +35,7 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
         Vector3 playerDir = targetEnemy.transform.position - player.transform.position;
         playerDir.y = 0;
         Quaternion dirQuat = Quaternion.LookRotation(playerDir);
-        Quaternion nextQuat = Quaternion.Slerp(player.transform.rotation, dirQuat, player.playerStats.Movement.rotateSpeed * Time.deltaTime);
+        Quaternion nextQuat = Quaternion.Slerp(player.transform.rotation, dirQuat, playerStats.Move.rotateSpeed * Time.deltaTime);
         player.transform.rotation = nextQuat;
 
         // 공격 쿨타임 계산
