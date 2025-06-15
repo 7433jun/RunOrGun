@@ -12,7 +12,7 @@ public class PlayerInputMove : PlayerMoveBehavior
         this.player = player;
         playerTransform = player.transform;
         playerController = player.GetComponent<CharacterController>();
-        playerStats = player.statsSystem.Stats;
+        playerStats = player.Stats;
     }
 
     public override void EnterBehavior()

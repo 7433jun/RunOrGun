@@ -11,14 +11,13 @@ public class Player : MonoBehaviour
     public CharacterRegistry characterRegistry;
     public PlayEvent playEvent;
 
-    public PlayerStatsSystem statsSystem;
-
+    public PlayerStats Stats { get; private set; }
     public PlayerVisual Visual { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
 
     void Awake()
     {
-        statsSystem = GetComponent<PlayerStatsSystem>();
+        Stats = GetComponent<PlayerStats>();
         Visual = GetComponent<PlayerVisual>();
         StateMachine = GetComponent<PlayerStateMachine>();
     }
@@ -29,7 +28,7 @@ public class Player : MonoBehaviour
 
         // 이거 값 넣어야됨
 
-        statsSystem.ApplyStats(dto);
+        // 스탯 초기화 함수 어쩌구
 
         // 로비씬에서 받아와서 적용시키기 지금은 임시 적용
         //playerStats = new();
