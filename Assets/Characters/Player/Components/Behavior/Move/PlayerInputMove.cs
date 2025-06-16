@@ -29,11 +29,11 @@ public class PlayerInputMove : PlayerMoveBehavior
         {
             // 회전
             Quaternion dirQuat = Quaternion.LookRotation(dir);
-            Quaternion nextQuat = Quaternion.Slerp(playerTransform.rotation, dirQuat, playerStats.Move.rotateSpeed * Time.deltaTime);
+            Quaternion nextQuat = Quaternion.Slerp(playerTransform.rotation, dirQuat, playerStats.Move.RotateSpeed * Time.deltaTime);
             playerTransform.rotation = nextQuat;
 
             // 이동
-            playerController.Move(dir * playerStats.Move.moveSpeedCurrent * Time.deltaTime);
+            playerController.Move(dir * playerStats.Move.MoveSpeed * Time.deltaTime);
         }
     }
 

@@ -1,10 +1,10 @@
 public class PlayerStatsDTO
 {
-    public PlayerHealthStatsDTO Health;
-    public PlayerMoveStatsDTO Move;
-    public PlayerAttackStatsDTO Attack;
-    public PlayerAmmoStatsDTO Ammo;
-    public PlayerProjectileStatsDTO Projectile;
+    public PlayerHealthStatsDTO Health = new();
+    public PlayerMoveStatsDTO Move = new();
+    public PlayerAttackStatsDTO Attack = new();
+    public PlayerAmmoStatsDTO Ammo = new();
+    public PlayerProjectileStatsDTO Projectile = new();
 }
 
 public class PlayerHealthStatsDTO
@@ -18,9 +18,10 @@ public class PlayerHealthStatsDTO
 
 public class PlayerMoveStatsDTO
 {
-    public float moveSpeed;
+    public float moveSpeedBase;
+    public float moveSpeedRatio;
     public float rotateSpeed;
-    public float sizeRate;
+    public float sizeRatio;
 }
 
 public class PlayerAttackStatsDTO

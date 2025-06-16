@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5491731284712983090}
   - component: {fileID: 6076729976969338265}
   - component: {fileID: 2383337395488700593}
+  - component: {fileID: -766390620951435077}
   - component: {fileID: 2713456842598033126}
   - component: {fileID: 848293943186933921}
   - component: {fileID: 2898160632835382732}
@@ -198,34 +199,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 1001
   playerName: Pistol
-  playerStats:
-    Movement:
-      moveSpeed: 0
-      rotateSpeed: 0
-      sizeRate: 0
-    Attack:
-      power: 0
-      powerRate: 0
-      range: 0
-      rangeRate: 0
-      cooldown: 0
-      cooldownRate: 0
-      angle: 0
-      angleRate: 0
-      projectileCount: 0
-    Magazine:
-      size: 0
-      reloadCooldown: 0
-      reloadCooldownRate: 0
-    Projectile:
-      sizeRate: 0
-      speed: 0
-      speedRate: 0
-      lifeTime: 0
-      lifeTimeRate: 0
-      bounceWall: 0
-      bounceEnemy: 0
-      pierceEnemy: 0
+--- !u!114 &-766390620951435077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678660331621021996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f494b3d654c9c46aa05ab7cdd743c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health:
+    isDead: 0
+    healthCurrent: 0
+    healthBase: 0
+    healthBonus: 0
+    healthRatioRaw: 0
+    healthRatio: 0
+    healthMax: 0
+    healthHealRatioRaw: 0
+    healthHealRatio: 0
+    healthDamageRatioRaw: 0
+    healthDamageRatio: 0
+  Move:
+    moveSpeedBase: 0
+    moveSpeedRatio: 0
+    moveSpeed: 0
+    rotateSpeed: 0
+    sizeRatio: 0
+  Attack:
+    powerBase: 0
+    powerBonus: 0
+    powerRatio: 0
+    attackSpeedBase: 0
+    attackSpeedBonus: 0
+    attackSpeedRatio: 0
+    criticalRateBase: 0
+    criticalRateBonus: 0
+    criticalDamageRatioBase: 0
+    criticalDamageRatioBonus: 0
+    rangeBase: 0
+    rangeBonus: 0
+    rangeRatio: 0
+    rangeInfinite: 0
+    knockBackBase: 0
+    knockBackBonus: 0
+    knockBackRatio: 0
+    simultaneousAttackCount: 0
+  Ammo:
+    ammoCurrent: 0
+    magazineSizeBase: 0
+    magazineSizeBonus: 0
+    magazineSizeRatio: 0
+    reloadTimeBase: 0
+    reloadTimeBonus: 0
+    reloadTimeRatio: 0
+    angleBase: 0
+    angleBonus: 0
+    angleRatio: 0
+  Projectile:
+    sizeRatio: 0
+    speed: 0
+    speedRatio: 0
+    lifeTime: 0
+    lifeTimeRatio: 0
+    bounceWall: 0
+    bounceEnemy: 0
+    pierceEnemy: 0
 --- !u!114 &2713456842598033126
 MonoBehaviour:
   m_ObjectHideFlags: 0

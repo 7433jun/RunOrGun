@@ -9,49 +9,76 @@ public class PlayerStats : MonoBehaviour
     public PlayerAttackStats Attack = new();
     public PlayerAmmoStats Ammo = new();
     public PlayerProjectileStats Projectile = new();
+
+    public void InitPlayerStats(PlayerStatsDTO dto)
+    {
+        Health.InitHealth(dto.Health);
+        Move.InitMove(dto.Move);
+    }
 }
 
 [Serializable]
 public class PlayerHealthStats
 {
-    public float healthCurrent;
+    [SerializeField] private bool isDead;
+    [SerializeField] private float healthCurrent;
 
-    public float healthBase;
-    public float healthBonusRaw;
-    public float healthBonus;
-    public float healthRatioRaw;
-    public float healthRatio;
-    public float healthMax;
+    [SerializeField] private float healthBase;
+    [SerializeField] private float healthBonus;
+    [SerializeField] private float healthRatioRaw;
+    [SerializeField] private float healthRatio;
+    [SerializeField] private float healthMax;
 
-    public float healthHealRatioRaw;
-    public float healthHealRatio;
+    [SerializeField] private float healthHealRatioRaw;
+    [SerializeField] private float healthHealRatio;
 
-    public float healthDamageRatioRaw;
-    public float healthDamageRatio;
+    [SerializeField] private float healthDamageRatioRaw;
+    [SerializeField] private float healthDamageRatio;
 
+    // 피격시 무적시간 필요할지도
+
+    // 체력 비율 최소값
+    private readonly float healthRatioClamp = 0.01f;
+    // 최대 체력 최소값
+    private readonly float healthMaxClamp = 1.0f;
+    // 회복 비율 최소값
+    private readonly float healthHealRatioClamp = 0f;
+    // 데미지 비율 최소값
+    private readonly float healthDamageRatioClamp = 0.01f;
+
+    public float Current => healthCurrent;
+    public float Base => healthBase;
+    public float Bonus => healthBonus;
+    public float Ratio => healthRatio;
+    public float Max => healthMax;
+    public float HealRatio => healthHealRatio;
+    public float DamageRatio => healthDamageRatio;
+
+    // 회복량 전달
     public event Action<float> OnPlayerHealed;
+    // 피해량 전달
     public event Action<float> OnPlayerDamaged;
     public event Action OnPlayerDie;
     public event Action OnMaxHealthChanged;
 
-    private void InitHealth(PlayerHealthStatsDTO dto)
+    public void InitHealth(PlayerHealthStatsDTO dto)
     {
         // 체력 초기화
         // 체력 연산의 기초 값들은 dto의 5개
         // 그 외는 모두 연산된 값
         healthBase = dto.healthBase;
-        healthBonusRaw = dto.healthBonusRaw;
+        healthBonus = dto.healthBonusRaw;
         healthRatioRaw = dto.healthRatioRaw;
         healthHealRatioRaw = dto.healthHealRatioRaw;
         healthDamageRatioRaw = dto.healthDamageRatioRaw;
 
-        healthBonus = Mathf.Max(healthBonusRaw, -healthBase + 1f);
-        healthRatio = Mathf.Max(healthRatioRaw, 0.01f);
-        healthHealRatio = Mathf.Max(healthHealRatioRaw, 0f);
-        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, 0.01f);
+        healthRatio = Mathf.Max(healthRatioRaw, healthRatioClamp);
+        healthHealRatio = Mathf.Max(healthHealRatioRaw, healthHealRatioClamp);
+        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, healthDamageRatioClamp);
 
         CalHealthMax();
         healthCurrent = healthMax;
+        isDead = false;
     }
 
     private void CalHealthMax()
@@ -59,9 +86,9 @@ public class PlayerHealthStats
         float healthMaxBefore = healthMax;
 
         healthMax = (healthBase + healthBonus) * healthRatio;
-        if (healthMax < 1.0f)
+        if (healthMax < healthMaxClamp)
         {
-            healthMax = 1.0f;
+            healthMax = healthMaxClamp;
         }
         if (healthCurrent > healthMax)
         {
@@ -90,92 +117,154 @@ public class PlayerHealthStats
     // 데미지
     public void DamageHealth(float amount)
     {
-        float healthDamageRatioClamp = Mathf.Max(healthHealRatioRaw, 0f);
-        float finalAmount = amount * healthDamageRatioClamp;
+        float finalAmount = amount * healthDamageRatio;
         healthCurrent -= finalAmount;
-        if (healthCurrent <= 0)
+        if (healthCurrent <= 0 && !isDead)
         {
             healthCurrent = 0f;
 
             OnPlayerDie?.Invoke();
+            isDead = true;
             return;
         }
 
         OnPlayerDamaged?.Invoke(finalAmount);
     }
 
+    private float HealthBonus
+    {
+        get => healthBonus;
+        set
+        {
+            healthBonus = value;
+            CalHealthMax();
+        }
+    }
+
     // 체력 추가값 증가
     public void IncreaseHealthBonus(float amount)
     {
-        healthBonusRaw += amount;
-        healthBonus = Mathf.Max(healthBonusRaw, -healthBase + 1f);
-        CalHealthMax();
+        HealthBonus += amount;
     }
 
     // 체력 추가값 감소
     public void DecreaseHealthBonus(float amount)
     {
-        healthBonusRaw -= amount;
-        healthBonus = Mathf.Max(healthBonusRaw, -healthBase + 1f);
-        CalHealthMax();
+        HealthBonus -= amount;
+    }
+
+    private float HealthRatioRaw
+    {
+        get => healthRatioRaw;
+        set
+        {
+            healthRatioRaw = value;
+            healthRatio = Mathf.Max(healthRatioRaw, healthRatioClamp);
+            CalHealthMax();
+        }
     }
 
     // 체력 비율 증가
     public void IncreaseHealthRatio(float amount)
     {
-        healthRatioRaw += amount;
-        healthRatio = Mathf.Max(healthRatioRaw, 0.01f);
-        CalHealthMax();
+        HealthRatioRaw += amount;
     }
 
     // 체력 비율 감소
     public void DecreaseHealthRatio(float amount)
     {
-        healthRatioRaw -= amount;
-        healthRatio = Mathf.Max(healthRatioRaw, 0.01f);
-        CalHealthMax();
+        HealthRatioRaw -= amount;
     }
 
     // 회복 비율 증가
     public void IncreaseHealthHealRatio(float amount)
     {
         healthHealRatioRaw += amount;
-        healthHealRatio = Mathf.Max(healthHealRatioRaw, 0f);
+        healthHealRatio = Mathf.Max(healthHealRatioRaw, healthHealRatioClamp);
     }
 
     // 회복 비율 감소
     public void DecreaseHealthHealRatio(float amount)
     {
         healthHealRatioRaw -= amount;
-        healthHealRatio = Mathf.Max(healthHealRatioRaw, 0f);
+        healthHealRatio = Mathf.Max(healthHealRatioRaw, healthHealRatioClamp);
     }
 
     // 받는 데미지 비율 증가
     public void IncreaseHealthDamageRatio(float amount)
     {
         healthDamageRatioRaw += amount;
-        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, 0.01f);
+        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, healthDamageRatioClamp);
     }
 
     // 받는 데미지 비율 감소
     public void DecreaseHealthDamageRatio(float amount)
     {
         healthDamageRatioRaw -= amount;
-        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, 0.01f);
+        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, healthDamageRatioClamp);
     }
 }
 
 [Serializable]
 public class PlayerMoveStats
 {
-    public float moveSpeedBase;
-    public float moveSpeedBonus;
-    public float moveSpeedRatio;
-    public float moveSpeedCurrent => (moveSpeedBase + moveSpeedBonus) * moveSpeedRatio;
+    [SerializeField] private float moveSpeedBase;
+    [SerializeField] private float moveSpeedRatioRaw;
+    [SerializeField] private float moveSpeedRatio;
+    [SerializeField] private float moveSpeed;
 
-    public float rotateSpeed; // 아마도 고정값
+    [SerializeField] private float rotateSpeed;
 
-    public float sizeRate; // 히트박스 관련
+    [SerializeField] private float sizeRatioRaw;
+    [SerializeField] private float sizeRatio; // 히트박스 관련
+
+    //
+    private readonly float moveSpeedRatioClamp = 0.1f;
+    // 사이즈 비율 최소값
+    private readonly float sizeRatioClamp = 0.1f;
+
+
+    public float MoveSpeedBase => moveSpeedBase;
+    public float MoveSpeedRatio => moveSpeedRatio;
+    public float MoveSpeed => moveSpeed;
+    public float RotateSpeed => rotateSpeed;
+    public float SizeRatio => sizeRatio;
+
+    public event Action OnSizeChanged;
+
+    public void InitMove(PlayerMoveStatsDTO dto)
+    {
+        moveSpeedBase = dto.moveSpeedBase;
+        moveSpeedRatio = dto.moveSpeedRatio;
+        rotateSpeed = dto.rotateSpeed;
+        sizeRatioRaw = dto.sizeRatio;
+
+
+    }
+
+    public void IncreaseMoveSpeedRatio(float amount)
+    {
+        moveSpeedRatioRaw += amount;
+        moveSpeedRatio = Mathf.Max(moveSpeedRatioRaw, moveSpeedRatioClamp);
+        moveSpeed = moveSpeedBase * moveSpeedRatio;
+    }
+
+    public void DecreaseMoveSpeedRatio(float amount)
+    {
+        moveSpeedRatioRaw -= amount;
+        moveSpeedRatio = Mathf.Max(moveSpeedRatioRaw, moveSpeedRatioClamp);
+        moveSpeed = moveSpeedBase * moveSpeedRatio;
+    }
+
+    public void IncreaseSizeRatio(float amount)
+    {
+
+    }
+
+    public void DecreaseSizeRatio(float amount)
+    {
+
+    }
 }
 
 [Serializable]

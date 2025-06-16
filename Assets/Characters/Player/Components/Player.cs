@@ -25,18 +25,24 @@ public class Player : MonoBehaviour
     void Start()
     {
         PlayerStatsDTO dto = new PlayerStatsDTO();
+        dto.Health.healthBase = 100f;
+        dto.Health.healthBonusRaw = 0f;
+        dto.Health.healthRatioRaw = 1f;
+        dto.Health.healthHealRatioRaw = 1f;
+        dto.Health.healthDamageRatioRaw = 1f;
+
+        dto.Move.moveSpeedBase = 1f;
+        dto.Move.moveSpeedRatio = 1f;
+        dto.Move.rotateSpeed = 30f;
+        dto.Move.sizeRatio = 1f;
+
+        Stats.InitPlayerStats(dto);
 
         // 이거 값 넣어야됨
 
         // 스탯 초기화 함수 어쩌구
 
         // 로비씬에서 받아와서 적용시키기 지금은 임시 적용
-        //playerStats = new();
-        //
-        //playerStats.Movement.moveSpeedBase = 1f;
-        //playerStats.Movement.rotateSpeed = 30f;
-        //playerStats.Movement.sizeRate = 1f;
-        //
         //playerStats.Attack.power = 10f;
         //playerStats.Attack.powerRate = 1f;
         //playerStats.Attack.range = 100f;
