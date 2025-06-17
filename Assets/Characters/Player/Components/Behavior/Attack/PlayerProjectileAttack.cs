@@ -39,8 +39,7 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
         player.transform.rotation = nextQuat;
 
         // 공격 쿨타임 계산
-        if (Time.time < lastAttackTime + playerStats.Attack.attackSpeedCurrent) return;
-
+        if (Time.time < lastAttackTime + playerStats.Attack.Speed) return;
 
 
         // 사거리계산?

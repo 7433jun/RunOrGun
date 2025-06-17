@@ -32,9 +32,9 @@ public class Player : MonoBehaviour
         dto.Health.healthDamageRatioRaw = 1f;
 
         dto.Move.moveSpeedBase = 1f;
-        dto.Move.moveSpeedRatio = 1f;
+        dto.Move.moveSpeedRatioRaw = 1f;
         dto.Move.rotateSpeed = 30f;
-        dto.Move.sizeRatio = 1f;
+        dto.Move.sizeRatioRaw = 1f;
 
         Stats.InitPlayerStats(dto);
 

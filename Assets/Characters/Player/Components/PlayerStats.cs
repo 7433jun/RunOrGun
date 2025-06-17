@@ -29,11 +29,11 @@ public class PlayerHealthStats
     [SerializeField] private float healthRatio;
     [SerializeField] private float healthMax;
 
-    [SerializeField] private float healthHealRatioRaw;
-    [SerializeField] private float healthHealRatio;
+    [SerializeField] private float healedRatioRaw;
+    [SerializeField] private float healedRatio;
 
-    [SerializeField] private float healthDamageRatioRaw;
-    [SerializeField] private float healthDamageRatio;
+    [SerializeField] private float damagedRatioRaw;
+    [SerializeField] private float damagedRatio;
 
     // 피격시 무적시간 필요할지도
 
@@ -46,13 +46,13 @@ public class PlayerHealthStats
     // 데미지 비율 최소값
     private readonly float healthDamageRatioClamp = 0.01f;
 
-    public float Current => healthCurrent;
-    public float Base => healthBase;
-    public float Bonus => healthBonus;
-    public float Ratio => healthRatio;
-    public float Max => healthMax;
-    public float HealRatio => healthHealRatio;
-    public float DamageRatio => healthDamageRatio;
+    public float HealthCurrent => healthCurrent;
+    public float HealthBase => healthBase;
+    public float HealthBonus => healthBonus;
+    public float HealthRatio => healthRatio;
+    public float HealthMax => healthMax;
+    public float HealRatio => healedRatio;
+    public float DamagedRatio => DamagedRatio;
 
     // 회복량 전달
     public event Action<float> OnPlayerHealed;
@@ -69,12 +69,12 @@ public class PlayerHealthStats
         healthBase = dto.healthBase;
         healthBonus = dto.healthBonusRaw;
         healthRatioRaw = dto.healthRatioRaw;
-        healthHealRatioRaw = dto.healthHealRatioRaw;
-        healthDamageRatioRaw = dto.healthDamageRatioRaw;
+        healedRatioRaw = dto.healthHealRatioRaw;
+        damagedRatioRaw = dto.healthDamageRatioRaw;
 
         healthRatio = Mathf.Max(healthRatioRaw, healthRatioClamp);
-        healthHealRatio = Mathf.Max(healthHealRatioRaw, healthHealRatioClamp);
-        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, healthDamageRatioClamp);
+        healedRatio = Mathf.Max(healedRatioRaw, healthHealRatioClamp);
+        damagedRatio = Mathf.Max(damagedRatioRaw, healthDamageRatioClamp);
 
         CalHealthMax();
         healthCurrent = healthMax;
@@ -104,7 +104,7 @@ public class PlayerHealthStats
     // 회복
     public void HealHealth(float amount)
     {
-        float finalAmount = amount * healthHealRatio;
+        float finalAmount = amount * healedRatio;
         healthCurrent += finalAmount;
         if (healthCurrent > healthMax)
         {
@@ -117,7 +117,7 @@ public class PlayerHealthStats
     // 데미지
     public void DamageHealth(float amount)
     {
-        float finalAmount = amount * healthDamageRatio;
+        float finalAmount = amount * DamagedRatio;
         healthCurrent -= finalAmount;
         if (healthCurrent <= 0 && !isDead)
         {
@@ -131,77 +131,62 @@ public class PlayerHealthStats
         OnPlayerDamaged?.Invoke(finalAmount);
     }
 
-    private float HealthBonus
-    {
-        get => healthBonus;
-        set
-        {
-            healthBonus = value;
-            CalHealthMax();
-        }
-    }
-
     // 체력 추가값 증가
     public void IncreaseHealthBonus(float amount)
     {
-        HealthBonus += amount;
+        healthBonus += amount;
+        CalHealthMax();
     }
 
     // 체력 추가값 감소
     public void DecreaseHealthBonus(float amount)
     {
-        HealthBonus -= amount;
-    }
-
-    private float HealthRatioRaw
-    {
-        get => healthRatioRaw;
-        set
-        {
-            healthRatioRaw = value;
-            healthRatio = Mathf.Max(healthRatioRaw, healthRatioClamp);
-            CalHealthMax();
-        }
+        healthBonus -= amount;
+        CalHealthMax();
     }
 
     // 체력 비율 증가
     public void IncreaseHealthRatio(float amount)
     {
-        HealthRatioRaw += amount;
+        healthRatioRaw += amount;
+        healthRatio = Mathf.Max(healthRatioRaw, healthRatioClamp);
+        CalHealthMax();
     }
 
     // 체력 비율 감소
     public void DecreaseHealthRatio(float amount)
     {
-        HealthRatioRaw -= amount;
+        healthRatioRaw -= amount;
+        healthRatio = Mathf.Max(healthRatioRaw, healthRatioClamp);
+        CalHealthMax();
     }
 
     // 회복 비율 증가
     public void IncreaseHealthHealRatio(float amount)
     {
-        healthHealRatioRaw += amount;
-        healthHealRatio = Mathf.Max(healthHealRatioRaw, healthHealRatioClamp);
+        healedRatioRaw += amount;
+        healedRatio = Mathf.Max(healedRatioRaw, healthHealRatioClamp);
     }
 
     // 회복 비율 감소
     public void DecreaseHealthHealRatio(float amount)
     {
-        healthHealRatioRaw -= amount;
-        healthHealRatio = Mathf.Max(healthHealRatioRaw, healthHealRatioClamp);
+        healedRatioRaw -= amount;
+        healedRatio = Mathf.Max(healedRatioRaw, healthHealRatioClamp);
     }
 
     // 받는 데미지 비율 증가
     public void IncreaseHealthDamageRatio(float amount)
     {
-        healthDamageRatioRaw += amount;
-        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, healthDamageRatioClamp);
+        damagedRatioRaw += amount;
+        damagedRatio = Mathf.Max(damagedRatioRaw, healthDamageRatioClamp);
     }
 
     // 받는 데미지 비율 감소
     public void DecreaseHealthDamageRatio(float amount)
     {
-        healthDamageRatioRaw -= amount;
-        healthDamageRatio = Mathf.Max(healthDamageRatioRaw, healthDamageRatioClamp);
+        damagedRatioRaw -= amount;
+        damagedRatio = Mathf.Max(damagedRatioRaw, healthDamageRatioClamp);
     }
 }
 
@@ -218,7 +203,7 @@ public class PlayerMoveStats
     [SerializeField] private float sizeRatioRaw;
     [SerializeField] private float sizeRatio; // 히트박스 관련
 
-    //
+    // 이동속도 비율 최소값
     private readonly float moveSpeedRatioClamp = 0.1f;
     // 사이즈 비율 최소값
     private readonly float sizeRatioClamp = 0.1f;
@@ -235,11 +220,14 @@ public class PlayerMoveStats
     public void InitMove(PlayerMoveStatsDTO dto)
     {
         moveSpeedBase = dto.moveSpeedBase;
-        moveSpeedRatio = dto.moveSpeedRatio;
+        moveSpeedRatioRaw = dto.moveSpeedRatioRaw;
         rotateSpeed = dto.rotateSpeed;
-        sizeRatioRaw = dto.sizeRatio;
+        sizeRatioRaw = dto.sizeRatioRaw;
 
+        moveSpeedRatio = Mathf.Max(moveSpeedRatioRaw, moveSpeedRatioClamp);
+        sizeRatio = Mathf.Max(sizeRatioRaw, sizeRatioClamp);
 
+        moveSpeed = moveSpeedBase * moveSpeedRatio;
     }
 
     public void IncreaseMoveSpeedRatio(float amount)
@@ -258,47 +246,106 @@ public class PlayerMoveStats
 
     public void IncreaseSizeRatio(float amount)
     {
+        sizeRatioRaw += amount;
+        sizeRatio = Mathf.Max(sizeRatioRaw, sizeRatioClamp);
 
+        OnSizeChanged?.Invoke();
     }
 
     public void DecreaseSizeRatio(float amount)
     {
+        sizeRatioRaw -= amount;
+        sizeRatio = Mathf.Max(sizeRatioRaw, sizeRatioClamp);
 
+        OnSizeChanged?.Invoke();
     }
 }
 
 [Serializable]
 public class PlayerAttackStats
 {
-    public float powerBase;
-    public float powerBonus;
-    public float powerRatio;
-    public float powerCurrent => (powerBase + powerBonus) * powerRatio;
+    // 공격력
+    private float powerBase;
+    private float powerBonus;
+    private float powerRatioRaw;
+    private float powerRatio;
+    private float power;
 
-    public float attackSpeedBase;
-    public float attackSpeedBonus;
-    public float attackSpeedRatio;
-    public float attackSpeedCurrent => (attackSpeedBase + attackSpeedBonus) * attackSpeedRatio;
+    private readonly float powerRatioClamp = 0.01f; // 공격력 비율 하한값
+    private readonly float powerClmap = 1f; // 공격력 하한값
 
-    public float criticalRateBase;
-    public float criticalRateBonus;
-    public float criticalRateCurrent => criticalRateBase + criticalRateBonus;
+    public float PowerBase => powerBase;
+    public float PowerBonus => powerBonus;
+    public float PowerRatio => powerRatio;
+    public float Power => power;
 
-    public float criticalDamageRatioBase;
-    public float criticalDamageRatioBonus;
-    public float criticalDamageRatioCurrent => criticalDamageRatioBase + criticalDamageRatioBonus;
+    // 공격속도
+    private float attackSpeedBase;
+    private float attackSpeedBonus;
+    private float attackSpeedRatioRaw;
+    private float attackSpeedRatio;
+    private float attackSpeed;
 
+    private readonly float attackSpeedRatioClamp = 0.01f; // 공격속도 비율 하한값
+    private readonly float attackSpeedClamp = 0.01f; // 공격속도 하한값
+
+    public float SpeedBase => attackSpeedBase;
+    public float SpeedBonus => attackSpeedBonus;
+    public float SpeedRatio => attackSpeedRatio;
+    public float Speed => attackSpeed;
+
+    // 치명타 확률
+    private float criticalRateBase;
+    private float criticalRateBonus;
+    private float criticalRate;
+
+    public float CriticalRateBase => criticalRateBase;
+    public float CriticalRateBonus => criticalRateBonus;
+    public float CriticalRate => criticalRate;
+
+    // 치명타 배율
+    private float criticalDamageRatioBase;
+    private float criticalDamageRatioBonus;
+    private float criticalDamageRatio;
+
+    private readonly float criticalDamageRatioClmap = 1f; // 치명타 배율 하한값
+
+    public float CriticalDamageRatioBase => criticalDamageRatioBase;
+    public float CriticalDamageRatioBonus => criticalDamageRatioBonus;
+    public float CriticalDamageRatio => criticalDamageRatio;
+
+    // 사거리
     public float rangeBase;
     public float rangeBonus;
     public float rangeRatio;
-    public float rangeCurrent => (rangeBase + rangeBonus) * rangeRatio;
+    public float range => (rangeBase + rangeBonus) * rangeRatio;
     public bool rangeInfinite;
 
+    // 넉백 강도
     public float knockBackBase;
     public float knockBackBonus;
     public float knockBackRatio;
 
     public int simultaneousAttackCount; // 공격당 공격횟수
+
+    public void InitAttack(PlayerAttackStatsDTO dto)
+    {
+        powerBase = dto.powerBase;
+        powerBonus = dto.powerBonus;
+        powerRatioRaw = dto.powerRatioRaw;
+        powerRatio = Mathf.Max(powerRatioRaw, powerRatioClamp);
+        power = Mathf.Max((powerBase + powerBonus) * powerRatio, powerClmap);
+
+        attackSpeedBase = dto.attackSpeedBase;
+        attackSpeedBonus = dto.attackSpeedBonus;
+        attackSpeedRatioRaw = dto.attackSpeedRatioRaw;
+        attackSpeedRatio = Mathf.Max(attackSpeedRatioRaw, attackSpeedRatioClamp);
+        attackSpeed = Mathf.Max((attackSpeedBase + attackSpeedBonus) * attackSpeedRatio, attackSpeedClamp);
+
+        criticalRateBase = dto.criticalRateBase;
+        criticalRateBonus = dto.criticalRateBonus;
+        criticalRate = criticalRateBase + criticalRateBonus;
+    }
 }
 
 [Serializable]
@@ -319,6 +366,11 @@ public class PlayerAmmoStats
     public float angleBonus;
     public float angleRatio;
     public float angleCurrent => (angleBase + angleBonus) * angleRatio;
+
+    public void InitAmmo(PlayerAmmoStatsDTO dto)
+    {
+
+    }
 }
 
 [Serializable]
@@ -337,4 +389,9 @@ public class PlayerProjectileStats
     public int bounceWall;
     public int bounceEnemy;
     public int pierceEnemy;
+    
+    public void InitProjectile(PlayerProjectileStatsDTO dto)
+    {
+
+    }
 }

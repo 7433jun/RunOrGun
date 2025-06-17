@@ -19,15 +19,24 @@ public class PlayerHealthStatsDTO
 public class PlayerMoveStatsDTO
 {
     public float moveSpeedBase;
-    public float moveSpeedRatio;
+    public float moveSpeedRatioRaw;
     public float rotateSpeed;
-    public float sizeRatio;
+    public float sizeRatioRaw;
 }
 
 public class PlayerAttackStatsDTO
 {
-    public float power;
-    public float powerRate;
+    public float powerBase;
+    public float powerBonus;
+    public float powerRatioRaw;
+
+    public float attackSpeedBase;
+    public float attackSpeedBonus;
+    public float attackSpeedRatioRaw;
+
+    public float criticalRateBase;
+    public float criticalRateBonus;
+
     public float range;
     public float rangeRate;
     public float cooldown;
