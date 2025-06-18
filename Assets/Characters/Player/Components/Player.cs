@@ -36,35 +36,42 @@ public class Player : MonoBehaviour
         dto.Move.rotateSpeed = 30f;
         dto.Move.sizeRatioRaw = 1f;
 
+        dto.Attack.powerBase = 10f;
+        dto.Attack.powerBonus = 0f;
+        dto.Attack.powerRatioRaw = 1f;
+        dto.Attack.attackSpeedBase = 0.5f;
+        dto.Attack.attackSpeedBonus = 0f;
+        dto.Attack.attackSpeedRatioRaw = 1f;
+        dto.Attack.criticalRateBase = 0f;
+        dto.Attack.criticalRateBonus = 0f;
+        dto.Attack.criticalDamageRatioBase = 1.5f;
+        dto.Attack.criticalDamageRatioBonus = 0f;
+        dto.Attack.isRangeInfinite = false;
+        dto.Attack.rangeBase = 100f;
+        dto.Attack.rangeBonus = 0f;
+        dto.Attack.knockBackBase = 1f;
+        dto.Attack.knockBackBonus = 0f;
+        dto.Attack.simultaneousAttack = 1;
+
+        dto.Ammo.magazineSizeBase = 10;
+        dto.Ammo.magazineSizeBonus = 0;
+        dto.Ammo.isAmmoInfinite = false;
+        dto.Ammo.reloadTimeBase = 3f;
+        dto.Ammo.reloadTimeBonus = 0f;
+        dto.Ammo.reloadTimeRatioRaw = 1f;
+        dto.Ammo.angleBase = 20f;
+        dto.Ammo.angleBonus = 0f;
+        dto.Ammo.angleRatioRaw = 1f;
+
+        dto.Projectile.sizeRatioRaw = 1f;
+        dto.Projectile.speedBase = 5f;
+        dto.Projectile.speedRatioRaw = 1f;
+        dto.Projectile.lifeTimeBase = 3f;
+        dto.Projectile.lifeTimeRatioRaw = 1f;
+        dto.Projectile.bounceWall = 0;
+        dto.Projectile.bounceEnemy = 0;
+        dto.Projectile.pierceEnemy = 0;
         Stats.InitPlayerStats(dto);
-
-        // 이거 값 넣어야됨
-
-        // 스탯 초기화 함수 어쩌구
-
-        // 로비씬에서 받아와서 적용시키기 지금은 임시 적용
-        //playerStats.Attack.power = 10f;
-        //playerStats.Attack.powerRate = 1f;
-        //playerStats.Attack.range = 100f;
-        //playerStats.Attack.rangeRate = 1f;
-        //playerStats.Attack.cooldown = 0.5f;
-        //playerStats.Attack.cooldownRate = 1f;
-        //playerStats.Attack.angle = 30f;
-        //playerStats.Attack.angleRatio = 1f;
-        //playerStats.Attack.projectileCount = 1;
-        //
-        //playerStats.Magazine.size = 10;
-        //playerStats.Magazine.reloadCooldown = 3f;
-        //playerStats.Magazine.reloadCooldownRate = 1f;
-        //
-        //playerStats.Projectile.sizeRate = 1f;
-        //playerStats.Projectile.speed = 5f;
-        //playerStats.Projectile.speedRate = 1f;
-        //playerStats.Projectile.lifeTime = 3f;
-        //playerStats.Projectile.lifeTimeRate = 1f;
-        //playerStats.Projectile.bounceWall = 0;
-        //playerStats.Projectile.bounceEnemy = 0;
-        //playerStats.Projectile.pierceEnemy = 0;
 
         //Visual.Initialize(DefinitionSO.ResourceSO);
         // 모델 데이터뿐아니라 애니메이션, 사운드, 이펙트 이런것도 프리팹에 클래스 구성해서 설정해놔야됨

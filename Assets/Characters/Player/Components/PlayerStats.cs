@@ -14,6 +14,9 @@ public class PlayerStats : MonoBehaviour
     {
         Health.InitHealth(dto.Health);
         Move.InitMove(dto.Move);
+        Attack.InitAttack(dto.Attack);
+        Ammo.InitAmmo(dto.Ammo);
+        Projectile.InitProjectile(dto.Projectile);
     }
 }
 
@@ -38,13 +41,13 @@ public class PlayerHealthStats
     // 피격시 무적시간 필요할지도
 
     // 체력 비율 최소값
-    private readonly float healthRatioClamp = 0.01f;
+    [SerializeField] private readonly float healthRatioClamp = 0.01f;
     // 최대 체력 최소값
-    private readonly float healthMaxClamp = 1.0f;
+    [SerializeField] private readonly float healthMaxClamp = 1.0f;
     // 회복 비율 최소값
-    private readonly float healthHealRatioClamp = 0f;
+    [SerializeField] private readonly float healthHealRatioClamp = 0f;
     // 데미지 비율 최소값
-    private readonly float healthDamageRatioClamp = 0.01f;
+    [SerializeField] private readonly float healthDamageRatioClamp = 0.01f;
 
     public float HealthCurrent => healthCurrent;
     public float HealthBase => healthBase;
@@ -204,9 +207,9 @@ public class PlayerMoveStats
     [SerializeField] private float sizeRatio; // 히트박스 관련
 
     // 이동속도 비율 최소값
-    private readonly float moveSpeedRatioClamp = 0.1f;
-    // 사이즈 비율 최소값
-    private readonly float sizeRatioClamp = 0.1f;
+    [SerializeField] private readonly float moveSpeedRatioClamp = 0.1f;
+    // 플레이어 사이즈 비율 최소값
+    [SerializeField] private readonly float sizeRatioClamp = 0.1f;
 
 
     public float MoveSpeedBase => moveSpeedBase;
@@ -265,29 +268,29 @@ public class PlayerMoveStats
 public class PlayerAttackStats
 {
     // 공격력
-    private float powerBase;
-    private float powerBonus;
-    private float powerRatioRaw;
-    private float powerRatio;
-    private float power;
+    [SerializeField] private float powerBase;
+    [SerializeField] private float powerBonus;
+    [SerializeField] private float powerRatioRaw;
+    [SerializeField] private float powerRatio;
+    [SerializeField] private float power;
 
-    private readonly float powerRatioClamp = 0.01f; // 공격력 비율 하한값
-    private readonly float powerClmap = 1f; // 공격력 하한값
+    [SerializeField] private readonly float powerRatioClamp = 0.01f; // 공격력 비율 하한값
+    [SerializeField] private readonly float powerClamp = 1f; // 공격력 하한값
 
     public float PowerBase => powerBase;
     public float PowerBonus => powerBonus;
     public float PowerRatio => powerRatio;
     public float Power => power;
 
-    // 공격속도
-    private float attackSpeedBase;
-    private float attackSpeedBonus;
-    private float attackSpeedRatioRaw;
-    private float attackSpeedRatio;
-    private float attackSpeed;
+    // 공격당 시간 간격(공격 속도)
+    [SerializeField] private float attackSpeedBase;
+    [SerializeField] private float attackSpeedBonus;
+    [SerializeField] private float attackSpeedRatioRaw;
+    [SerializeField] private float attackSpeedRatio;
+    [SerializeField] private float attackSpeed;
 
-    private readonly float attackSpeedRatioClamp = 0.01f; // 공격속도 비율 하한값
-    private readonly float attackSpeedClamp = 0.01f; // 공격속도 하한값
+    [SerializeField] private readonly float attackSpeedRatioClamp = 0.01f; // 공격속도 비율 하한값
+    [SerializeField] private readonly float attackSpeedClamp = 0.01f; // 공격속도 하한값
 
     public float SpeedBase => attackSpeedBase;
     public float SpeedBonus => attackSpeedBonus;
@@ -295,38 +298,53 @@ public class PlayerAttackStats
     public float Speed => attackSpeed;
 
     // 치명타 확률
-    private float criticalRateBase;
-    private float criticalRateBonus;
-    private float criticalRate;
+    [SerializeField] private float criticalRateBase;
+    [SerializeField] private float criticalRateBonus;
+    [SerializeField] private float criticalRate;
 
     public float CriticalRateBase => criticalRateBase;
     public float CriticalRateBonus => criticalRateBonus;
     public float CriticalRate => criticalRate;
 
     // 치명타 배율
-    private float criticalDamageRatioBase;
-    private float criticalDamageRatioBonus;
-    private float criticalDamageRatio;
+    [SerializeField] private float criticalDamageRatioBase;
+    [SerializeField] private float criticalDamageRatioBonus;
+    [SerializeField] private float criticalDamageRatio;
 
-    private readonly float criticalDamageRatioClmap = 1f; // 치명타 배율 하한값
+    [SerializeField] private readonly float criticalDamageRatioClamp = 1f; // 치명타 배율 하한값
 
     public float CriticalDamageRatioBase => criticalDamageRatioBase;
     public float CriticalDamageRatioBonus => criticalDamageRatioBonus;
     public float CriticalDamageRatio => criticalDamageRatio;
 
     // 사거리
-    public float rangeBase;
-    public float rangeBonus;
-    public float rangeRatio;
-    public float range => (rangeBase + rangeBonus) * rangeRatio;
-    public bool rangeInfinite;
+    [SerializeField] private bool isRangeInfinite;
+    [SerializeField] private float rangeBase;
+    [SerializeField] private float rangeBonus;
+    [SerializeField] private float range;
+
+    [SerializeField] private readonly float rangeClamp = 10f; // 사거리 하한값
+
+    public bool IsRangeInfinite => isRangeInfinite;
+    public float RangeBase => rangeBase;
+    public float RangeBonus => rangeBonus;
+    public float Range => range;
 
     // 넉백 강도
-    public float knockBackBase;
-    public float knockBackBonus;
-    public float knockBackRatio;
+    [SerializeField] private float knockBackBase;
+    [SerializeField] private float knockBackBonus;
+    [SerializeField] private float knockBack;
 
-    public int simultaneousAttackCount; // 공격당 공격횟수
+    [SerializeField] private readonly float knockBackClamp = 0f; // 넉백강도 하한값
+
+    public float KnockBackBase => knockBackBase;
+    public float KnockBackBonus => knockBackBonus;
+    public float KnockBack => knockBack;
+
+
+    [SerializeField] private int simultaneousAttack; // 공격당 공격횟수
+
+    public int SimultaneousAttack => simultaneousAttack;
 
     public void InitAttack(PlayerAttackStatsDTO dto)
     {
@@ -334,7 +352,7 @@ public class PlayerAttackStats
         powerBonus = dto.powerBonus;
         powerRatioRaw = dto.powerRatioRaw;
         powerRatio = Mathf.Max(powerRatioRaw, powerRatioClamp);
-        power = Mathf.Max((powerBase + powerBonus) * powerRatio, powerClmap);
+        power = Mathf.Max((powerBase + powerBonus) * powerRatio, powerClamp);
 
         attackSpeedBase = dto.attackSpeedBase;
         attackSpeedBonus = dto.attackSpeedBonus;
@@ -345,53 +363,173 @@ public class PlayerAttackStats
         criticalRateBase = dto.criticalRateBase;
         criticalRateBonus = dto.criticalRateBonus;
         criticalRate = criticalRateBase + criticalRateBonus;
+
+        criticalDamageRatioBase = dto.criticalDamageRatioBase;
+        criticalDamageRatioBonus = dto.criticalDamageRatioBonus;
+        criticalDamageRatio = Mathf.Max(criticalDamageRatioBase + criticalDamageRatioBonus, criticalDamageRatioClamp);
+
+        isRangeInfinite = dto.isRangeInfinite;
+        rangeBase = dto.rangeBase;
+        rangeBonus = dto.rangeBonus;
+        range = Mathf.Max(rangeBase + rangeBonus, rangeClamp);
+
+        knockBackBase = dto.knockBackBase;
+        knockBackBonus = dto.knockBackBonus;
+        knockBack = Mathf.Max(knockBackBase + knockBackBonus, knockBackClamp);
+
+        simultaneousAttack = dto.simultaneousAttack;
     }
 }
 
 [Serializable]
 public class PlayerAmmoStats
 {
-    public int ammoCurrent;
-    public int magazineSizeBase;
-    public int magazineSizeBonus;
-    public float magazineSizeRatio;
-    public int magazineSizeCurrent => Mathf.CeilToInt((magazineSizeBase + magazineSizeBonus) * magazineSizeRatio);
+    // 탄창크기 및 남은탄환수
+    [SerializeField] private int ammoCurrent;
+    [SerializeField] private int magazineSize;
+    [SerializeField] private int magazineSizeBase;
+    [SerializeField] private int magazineSizeBonus;
 
-    public float reloadTimeBase;
-    public float reloadTimeBonus;
-    public float reloadTimeRatio;
-    public float reloadTimeCurrent => (reloadTimeBase + reloadTimeBonus) * reloadTimeRatio;
+    [SerializeField] private readonly int magazineSizeClamp = 1; // 탄창크기 하한값
 
-    public float angleBase; // 발사 최대각도
-    public float angleBonus;
-    public float angleRatio;
-    public float angleCurrent => (angleBase + angleBonus) * angleRatio;
+    public int AmmoCurrent => ammoCurrent;
+    public int MagazineSize => magazineSize;
+    public int MagazineSizeBase => magazineSizeBase;
+    public int MagazineSizeBonus => magazineSizeBonus;
+
+    // 재장전 시간(장전속도)
+    [SerializeField] private bool isAmmoInfinite;
+    [SerializeField] private float reloadTime;
+    [SerializeField] private float reloadTimeBase;
+    [SerializeField] private float reloadTimeBonus;
+    [SerializeField] private float reloadTimeRatioRaw;
+    [SerializeField] private float reloadTimeRatio;
+
+    [SerializeField] private readonly float reloadTimeClamp = 0.01f; // 장전속도 하한값
+    [SerializeField] private readonly float reloadTimeRatioClamp = 0.01f; // 장전속도 비율 하한값
+
+    public bool IsAmmoInfinite => isAmmoInfinite;
+    public float ReloadTime => reloadTime;
+    public float ReloadTimeBase => reloadTimeBase;
+    public float ReloadTimeBonus => reloadTimeBonus;
+    public float ReloadTimeRatio => reloadTimeRatio;
+
+    // 사격 최대 각도
+    [SerializeField] private float angle;
+    [SerializeField] private float angleBase;
+    [SerializeField] private float angleBonus;
+    [SerializeField] private float angleRatioRaw;
+    [SerializeField] private float angleRatio;
+
+    [SerializeField] private readonly float angleClamp = 0f; // 사격 각도 하한값
+    [SerializeField] private readonly float angleRatioClamp = 0.01f; // 사격 각도 비율 하한값
+
+    public float Angle => angle;
+    public float AngleBase => angleBase;
+    public float AngleBonus => angleBonus;
+    public float AngleRatio => angleRatio;
 
     public void InitAmmo(PlayerAmmoStatsDTO dto)
     {
+        magazineSizeBase = dto.magazineSizeBase;
+        magazineSizeBonus = dto.magazineSizeBonus;
+        magazineSize = Mathf.Max(magazineSizeBase + magazineSizeBonus, magazineSizeClamp);
+        ammoCurrent = magazineSize;
 
+        isAmmoInfinite = dto.isAmmoInfinite;
+        reloadTimeBase = dto.reloadTimeBase;
+        reloadTimeBonus = dto.reloadTimeBonus;
+        reloadTimeRatioRaw = dto.reloadTimeRatioRaw;
+        reloadTimeRatio = Mathf.Max(reloadTimeRatioRaw, reloadTimeRatioClamp);
+        reloadTime = Mathf.Max((reloadTimeBase + reloadTimeBonus) * reloadTimeRatio, reloadTimeClamp);
+
+        angleBase = dto.angleBase;
+        angleBonus = dto.angleBonus;
+        angleRatioRaw = dto.angleRatioRaw;
+        angleRatio = Mathf.Max(angleRatioRaw, angleRatioClamp);
+        angle = Mathf.Max((angleBase + angleBonus) * angleRatio, angleClamp);
+    }
+
+    public bool TryUseAmmo(int amount)
+    {
+        if (amount <= 0) return false;
+
+        if (ammoCurrent >= amount)
+        {
+            ammoCurrent -= amount;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void ReloadAmmo()
+    {
+        ammoCurrent = magazineSize;
     }
 }
 
 [Serializable]
 public class PlayerProjectileStats
 {
-    public float sizeRatio;
+    // 투사체 사이즈 비율
+    [SerializeField] private float sizeRatioRaw;
+    [SerializeField] private float sizeRatio;
 
-    public float speed;
-    public float speedRatio;
-    public float speedCurrent => speed * speedRatio;
+    [SerializeField] private readonly float sizeRatioClmap = 0.1f; // 투사체 사이즈 비율 하한값
 
-    public float lifeTime;
-    public float lifeTimeRatio;
-    public float lifeTimeCurrent => lifeTime * lifeTimeRatio;
+    public float SizeRatio => sizeRatio;
 
-    public int bounceWall;
-    public int bounceEnemy;
-    public int pierceEnemy;
+    // 투사체 속도
+    [SerializeField] private float speed;
+    [SerializeField] private float speedBase;
+    [SerializeField] private float speedRatioRaw;
+    [SerializeField] private float speedRatio;
+
+    [SerializeField] private readonly float speedClamp = 1f; // 투사체 속도 하한값
+    [SerializeField] private readonly float speedRatioClamp = 0.01f; // 투사체 속도 비율 하한값
+
+    public float Speed => speed;
+    public float SpeedBase => speedBase;
+    public float SpeedRatio => speedRatio;
+
+    // 투사체 지속시간
+    [SerializeField] private float lifeTime;
+    [SerializeField] private float lifeTimeBase;
+    [SerializeField] private float lifeTimeRatioRaw;
+    [SerializeField] private float lifeTimeRatio;
+
+    [SerializeField] private readonly float lifeTimeClamp = 1f; // 투사체 지속시간 하한값
+    [SerializeField] private readonly float lifeTimeRatioClamp = 0.01f; // 투사체 지속시간 비율 하한값
+
+    public float LifeTime => lifeTime;
+    public float LifeTimeBase => lifeTimeBase;
+    public float LifeTimeRatio => lifeTimeRatio;
+
+    // 투사체 옵션
+    [SerializeField] public int bounceWall; // 벽 반사 횟수
+    [SerializeField] public int bounceEnemy; // 적 반사 횟수
+    [SerializeField] public int pierceEnemy; // 적 관통 횟수
     
     public void InitProjectile(PlayerProjectileStatsDTO dto)
     {
+        sizeRatioRaw = dto.sizeRatioRaw;
+        sizeRatio = Mathf.Max(sizeRatioRaw, sizeRatioClmap);
 
+        speedBase = dto.speedBase;
+        speedRatioRaw = dto.speedRatioRaw;
+        speedRatio = Mathf.Max(speedRatioRaw, speedRatioClamp);
+        speed = Mathf.Max(speedBase * speedRatio, speedClamp);
+
+        lifeTimeBase = dto.lifeTimeBase;
+        lifeTimeRatioRaw = dto.lifeTimeRatioRaw;
+        lifeTimeRatio = Mathf.Max(lifeTimeRatioRaw, lifeTimeRatioClamp);
+        lifeTime = Mathf.Max(lifeTimeBase * lifeTimeRatio, lifeTimeClamp);
+
+        bounceWall = dto.bounceWall;
+        bounceEnemy = dto.bounceEnemy;
+        pierceEnemy = dto.pierceEnemy;
     }
 }

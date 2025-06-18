@@ -35,7 +35,11 @@ public class PlayerAttackState : IROGState
             playerStateMachine.StateMachine.ChangeState(playerStateMachine.PlayerIdleState);
             return;
         }
-        // DieState 넘길 조건 추가
+        if (player.Stats.Health.HealthCurrent <= 0)
+        {
+            playerStateMachine.StateMachine.ChangeState(playerStateMachine.PlayerDieState);
+            return;
+        }
 
         attack.UpdateBehavior();
     }

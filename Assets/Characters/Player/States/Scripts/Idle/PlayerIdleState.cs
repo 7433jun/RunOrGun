@@ -4,7 +4,6 @@ public class PlayerIdleState : IROGState
 {
     private Player player;
     private PlayerStateMachine playerStateMachine;
-    //private PlayerIdleBehaviorSO idleSO;
     private PlayerIdleBehavior idle;
 
     public PlayerIdleState(Player player, PlayerStateMachine playerStateMachine)
@@ -34,7 +33,11 @@ public class PlayerIdleState : IROGState
             playerStateMachine.StateMachine.ChangeState(playerStateMachine.PlayerAttackState);
             return;
         }
-        // DieState 넘길 조건 추가
+        if (player.Stats.Health.HealthCurrent <= 0)
+        {
+            playerStateMachine.StateMachine.ChangeState(playerStateMachine.PlayerDieState);
+            return;
+        }
 
         idle.UpdateBehavior();
     }
