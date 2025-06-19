@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerProjectileAttack : PlayerAttackBehavior
@@ -12,6 +13,8 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
     private PlayerStats playerStats;
 
     private float lastAttackTime;
+
+    private Queue<GameObject> projectilePool = new Queue<GameObject>();
 
     public override void InitBehavior(Player player)
     {
@@ -59,10 +62,20 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
         projectileDir.y = 0;
         Quaternion projectileRot = Quaternion.LookRotation(projectileDir.normalized);
 
-        // 투사체 생성, 초기화 (투사체에 옵션 붙을수도있으니 별개 함수로 빼줘야할듯)
-        GameObject projectileObj = Instantiate(projectilePrefab, projectileSpawnPos, projectileRot);
+        // 투사체 생성, 초기화, 풀링 (투사체에 옵션 붙을수도있으니 별개 함수로 빼줘야할듯)
+        GameObject projectileObj;
+        if (projectilePool.Count > 0)
+        {
+            projectileObj = projectilePool.Dequeue();
+            projectileObj.transform.SetPositionAndRotation(projectileSpawnPos, projectileRot);
+            projectileObj.SetActive(true);
+        }
+        else
+        {
+            projectileObj = Instantiate(projectilePrefab, projectileSpawnPos, projectileRot);
+        }
         var projectile = projectileObj.GetComponent<PlayerProjectile>();
-        projectile.Initilize(playerStats.Projectile);
+        projectile.Initilize(playerStats.Projectile, projectilePool);
 
         // 남은 탄환 없으면 장전시작
         if (playerStats.Ammo.AmmoCurrent == 0)

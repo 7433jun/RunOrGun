@@ -1,21 +1,27 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
-    private GameObject model;
+    private Vector3 sizeBase;
 
     // 초기 트랜스폼 값 가져와서 base값 설정하기
 
-    private float sizeRate;
-    private float speed;
-    private float lifeTime;
-    private int bounceWall;
-    private int bounceEnemy;
-    private int pierceEnemy;
+    [SerializeField] private float sizeRate;
+    [SerializeField] private float speed;
+    [SerializeField] private float lifeTime;
+    [SerializeField] private int bounceWall;
+    [SerializeField] private int bounceEnemy;
+    [SerializeField] private int pierceEnemy;
 
-    private float lifeTimer;
+    [SerializeField] private float lifeTimer;
 
-    public void Initilize(PlayerProjectileStats projectileStats)
+    Queue<GameObject> pool;
+    private bool isReturned = false;
+
+    
+
+    public void Initilize(PlayerProjectileStats projectileStats, Queue<GameObject> pool)
     {
         // 투사체 스탯값 기입
         this.sizeRate = projectileStats.SizeRatio;
@@ -25,12 +31,16 @@ public class PlayerProjectile : MonoBehaviour
         bounceEnemy = projectileStats.bounceEnemy;
         pierceEnemy = projectileStats.pierceEnemy;
 
-        
+        transform.localScale = sizeBase * sizeRate;
+
+        this.pool = pool;
+        lifeTimer = 0f;
+        isReturned = false;
     }
 
-    void OnEnable()
+    private void Awake()
     {
-        lifeTimer = 0f;
+        sizeBase = transform.localScale;
     }
 
     void Update()
@@ -40,7 +50,30 @@ public class PlayerProjectile : MonoBehaviour
         lifeTimer += Time.deltaTime;
         if (lifeTimer >= lifeTime)
         {
-            gameObject.SetActive(false);
+            ReturnProjectile();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Enemy>(out var enemy))
+        {
+            ReturnProjectile();
+        }
+        else if (other.TryGetComponent<Wall>(out var wall))
+        {
+            Debug.Log($"{lifeTimer} {lifeTime}");
+            ReturnProjectile();
+        }
+    }
+
+    private void ReturnProjectile()
+    {
+        if (isReturned) return;
+
+        isReturned = true;
+        lifeTimer = 0f;
+        gameObject.SetActive(false);
+        pool.Enqueue(gameObject);
     }
 }
