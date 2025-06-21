@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         dto.Projectile.speedRatioRaw = 1f;
         dto.Projectile.lifeTimeBase = 3f;
         dto.Projectile.lifeTimeRatioRaw = 1f;
-        dto.Projectile.bounceWall = 0;
+        dto.Projectile.bounceWall = 1;
         dto.Projectile.bounceEnemy = 0;
         dto.Projectile.pierceEnemy = 0;
         Stats.InitPlayerStats(dto);
