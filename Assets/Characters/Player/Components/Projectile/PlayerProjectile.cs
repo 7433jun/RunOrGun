@@ -5,6 +5,7 @@ public class PlayerProjectile : MonoBehaviour
 {
     private Vector3 sizeBase;
     private Vector3 direction;
+    private Player player;
 
     // 초기 트랜스폼 값 가져와서 base값 설정하기
 
@@ -22,15 +23,16 @@ public class PlayerProjectile : MonoBehaviour
 
     
 
-    public void Initilize(PlayerProjectileStats projectileStats, Vector3 direction, Queue<GameObject> pool)
+    public void Initilize(Player player, Vector3 direction, Queue<GameObject> pool)
     {
+        this.player = player;
         // 투사체 스탯값 기입
-        this.sizeRate = projectileStats.SizeRatio;
-        this.speed = projectileStats.Speed;
-        this.lifeTime = projectileStats.LifeTime;
-        bounceWall = projectileStats.bounceWall;
-        bounceEnemy = projectileStats.bounceEnemy;
-        pierceEnemy = projectileStats.pierceEnemy;
+        sizeRate = player.Stats.Projectile.SizeRatio;
+        speed = player.Stats.Projectile.Speed;
+        lifeTime = player.Stats.Projectile.LifeTime;
+        bounceWall = player.Stats.Projectile.bounceWall;
+        bounceEnemy = player.Stats.Projectile.bounceEnemy;
+        pierceEnemy = player.Stats.Projectile.pierceEnemy;
 
         transform.localScale = sizeBase * sizeRate;
 
@@ -62,10 +64,22 @@ public class PlayerProjectile : MonoBehaviour
         Debug.Log(collision.gameObject.name);
         if (collision.gameObject.TryGetComponent<Enemy>(out var enemy))
         {
+            //데미지 함수
+            Debug.Log("enemy hit");
+
             // 적 반사
             if (bounceEnemy > 0)
             {
-
+                List<Enemy> enemies = new List<Enemy>(player.characterRegistry.Enemies);
+                enemies.Remove(enemy);
+                if (enemies.Count > 0)
+                {
+                    Enemy newTargetEnemy = ROGUtility.GetClosestEnemy(transform, enemies);
+                    direction = newTargetEnemy.transform.position - enemy.transform.position;
+                    transform.rotation = Quaternion.LookRotation(direction);
+                    bounceEnemy--;
+                    return;
+                }
             }
             // 적 관통
             if (pierceEnemy > 0)

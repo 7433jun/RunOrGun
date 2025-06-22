@@ -32,7 +32,7 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
     public override void UpdateBehavior()
     {
         // 적 감지
-        Enemy targetEnemy = ROGUtility.GetClosestEnemy(player, player.characterRegistry.Enemies);
+        Enemy targetEnemy = ROGUtility.GetClosestEnemy(playerTransform, player.characterRegistry.Enemies);
         if (targetEnemy == null) return;
 
         // 플레이어 회전
@@ -75,7 +75,7 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
             projectileObj = Instantiate(projectilePrefab, projectileSpawnPos, projectileRot);
         }
         var projectile = projectileObj.GetComponent<PlayerProjectile>();
-        projectile.Initilize(playerStats.Projectile, projectileDir, projectilePool);
+        projectile.Initilize(player, projectileDir, projectilePool);
 
         // 남은 탄환 없으면 장전시작
         if (playerStats.Ammo.AmmoCurrent == 0)

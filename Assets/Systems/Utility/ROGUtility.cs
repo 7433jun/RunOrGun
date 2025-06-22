@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class ROGUtility
 {
-    public static Enemy GetClosestEnemy(Player player, List<Enemy> enemies)
+    public static Enemy GetClosestEnemy(Transform transform, List<Enemy> enemies)
     {
-        if (player == null || enemies.Count == 0)
+        if (enemies.Count == 0)
             return null;
 
         Enemy closestEnemy = null;
-        Vector3 playerPos = player.transform.position;
+        Vector3 playerPos = transform.position;
         float minSqrDistance = float.MaxValue;
 
         foreach (Enemy enemy in enemies)
