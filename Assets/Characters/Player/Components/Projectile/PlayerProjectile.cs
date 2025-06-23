@@ -21,7 +21,7 @@ public class PlayerProjectile : MonoBehaviour
     Queue<GameObject> pool;
     private bool isReturned = false;
 
-    
+    private Rigidbody rigidBody;
 
     public void Initilize(Player player, Vector3 direction, Queue<GameObject> pool)
     {
@@ -46,12 +46,16 @@ public class PlayerProjectile : MonoBehaviour
     private void Awake()
     {
         sizeBase = transform.localScale;
+        rigidBody = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        rigidBody.linearVelocity = direction * speed;
     }
 
     void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
-
         lifeTimer += Time.deltaTime;
         if (lifeTimer >= lifeTime)
         {
@@ -61,11 +65,27 @@ public class PlayerProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
-        if (collision.gameObject.TryGetComponent<Enemy>(out var enemy))
+        if (collision.gameObject.TryGetComponent<Wall>(out var wall))
+        {
+            // 벽 반사, 별개 컴포넌트 분리는 나중에 하자 이벤트 구독으로 어떻게 하면 될거같은데
+            if (bounceWall > 0)
+            {
+                Vector3 normal = collision.contacts[0].normal;
+                direction = Vector3.Reflect(direction, normal).normalized;
+                transform.rotation = Quaternion.LookRotation(direction);
+                bounceWall--;
+                return;
+            }
+            ReturnProjectile();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Enemy>(out var enemy))
         {
             //데미지 함수
-            Debug.Log("enemy hit");
+            //Debug.Log(other.name + " hit");
 
             // 적 반사
             if (bounceEnemy > 0)
@@ -75,7 +95,8 @@ public class PlayerProjectile : MonoBehaviour
                 if (enemies.Count > 0)
                 {
                     Enemy newTargetEnemy = ROGUtility.GetClosestEnemy(transform, enemies);
-                    direction = newTargetEnemy.transform.position - enemy.transform.position;
+                    transform.position = enemy.transform.position;
+                    direction = (newTargetEnemy.transform.position - enemy.transform.position).normalized;
                     transform.rotation = Quaternion.LookRotation(direction);
                     bounceEnemy--;
                     return;
@@ -84,19 +105,7 @@ public class PlayerProjectile : MonoBehaviour
             // 적 관통
             if (pierceEnemy > 0)
             {
-
-            }
-            ReturnProjectile();
-        }
-        else if (collision.gameObject.TryGetComponent<Wall>(out var wall))
-        {
-            // 벽 반사, 별개 컴포넌트 분리는 나중에 하자 이벤트 구독으로 어떻게 하면 될거같은데
-            if (bounceWall > 0)
-            {
-                Vector3 normal = collision.contacts[0].normal;
-                direction = Vector3.Reflect(direction, normal).normalized;
-                transform.rotation = Quaternion.LookRotation(direction);
-                bounceWall--;
+                pierceEnemy--;
                 return;
             }
             ReturnProjectile();

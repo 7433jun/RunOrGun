@@ -69,8 +69,8 @@ public class Player : MonoBehaviour
         dto.Projectile.lifeTimeBase = 3f;
         dto.Projectile.lifeTimeRatioRaw = 1f;
         dto.Projectile.bounceWall = 1;
-        dto.Projectile.bounceEnemy = 0;
-        dto.Projectile.pierceEnemy = 0;
+        dto.Projectile.bounceEnemy = 1;
+        dto.Projectile.pierceEnemy = 1;
         Stats.InitPlayerStats(dto);
 
         //Visual.Initialize(DefinitionSO.ResourceSO);
@@ -92,5 +92,11 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         MoveInput = value.Get<Vector2>();
+    }
+
+    // юс╫ц
+    private void OnDisable()
+    {
+        characterRegistry.Unregister(this);
     }
 }

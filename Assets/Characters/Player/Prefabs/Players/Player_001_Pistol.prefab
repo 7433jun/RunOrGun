@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6957187552068811060}
   - component: {fileID: 6357108820979835975}
   - component: {fileID: 7946590443248261333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol1_01_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8010814647974959834}
   - component: {fileID: 8690834877248168857}
   - component: {fileID: -4915603770442783784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player_001_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,51 +219,69 @@ MonoBehaviour:
     healthRatioRaw: 0
     healthRatio: 0
     healthMax: 0
-    healthHealRatioRaw: 0
-    healthHealRatio: 0
-    healthDamageRatioRaw: 0
-    healthDamageRatio: 0
+    healedRatioRaw: 0
+    healedRatio: 0
+    damagedRatioRaw: 0
+    damagedRatio: 0
   Move:
     moveSpeedBase: 0
+    moveSpeedRatioRaw: 0
     moveSpeedRatio: 0
     moveSpeed: 0
     rotateSpeed: 0
+    sizeRatioRaw: 0
     sizeRatio: 0
   Attack:
     powerBase: 0
     powerBonus: 0
+    powerRatioRaw: 0
     powerRatio: 0
+    power: 0
     attackSpeedBase: 0
     attackSpeedBonus: 0
+    attackSpeedRatioRaw: 0
     attackSpeedRatio: 0
+    attackSpeed: 0
     criticalRateBase: 0
     criticalRateBonus: 0
+    criticalRate: 0
     criticalDamageRatioBase: 0
     criticalDamageRatioBonus: 0
+    criticalDamageRatio: 0
+    isRangeInfinite: 0
     rangeBase: 0
     rangeBonus: 0
-    rangeRatio: 0
-    rangeInfinite: 0
+    range: 0
     knockBackBase: 0
     knockBackBonus: 0
-    knockBackRatio: 0
-    simultaneousAttackCount: 0
+    knockBack: 0
+    simultaneousAttack: 0
   Ammo:
     ammoCurrent: 0
+    magazineSize: 0
     magazineSizeBase: 0
     magazineSizeBonus: 0
-    magazineSizeRatio: 0
+    isAmmoInfinite: 0
+    reloadTime: 0
     reloadTimeBase: 0
     reloadTimeBonus: 0
+    reloadTimeRatioRaw: 0
     reloadTimeRatio: 0
+    angle: 0
     angleBase: 0
     angleBonus: 0
+    angleRatioRaw: 0
     angleRatio: 0
   Projectile:
+    sizeRatioRaw: 0
     sizeRatio: 0
     speed: 0
+    speedBase: 0
+    speedRatioRaw: 0
     speedRatio: 0
     lifeTime: 0
+    lifeTimeBase: 0
+    lifeTimeRatioRaw: 0
     lifeTimeRatio: 0
     bounceWall: 0
     bounceEnemy: 0
@@ -366,7 +384,7 @@ GameObject:
   - component: {fileID: 6887141823635173241}
   - component: {fileID: 3677585542511892078}
   - component: {fileID: 8345383518186976939}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol1_01_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +470,7 @@ GameObject:
   - component: {fileID: 6627828489692781736}
   - component: {fileID: 2454816027064871121}
   - component: {fileID: 6271091455537244599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol1_01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +556,7 @@ GameObject:
   - component: {fileID: 8872721350930752010}
   - component: {fileID: 6675337442006591361}
   - component: {fileID: 5803573797617407927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +572,7 @@ Transform:
   m_GameObject: {fileID: 2890668282756950799}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.18, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -624,7 +642,7 @@ GameObject:
   - component: {fileID: 3793605926543279727}
   - component: {fileID: 1135606139325502221}
   - component: {fileID: 4298041039783470847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol1_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +732,7 @@ GameObject:
   - component: {fileID: 6894404064437930484}
   - component: {fileID: 3196918572212432493}
   - component: {fileID: 2978343961730573997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol1_01_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -30,12 +30,16 @@ public class Enemy : MonoBehaviour
         //Visual.Initialize();
 
         StateMachine.Initialize(this);
-
-        GetComponent<CharacterController>().skinWidth = 0.001f;
     }
 
     public void Initialize(CharacterRegistry registry)
     {
         characterRegistry = registry;
+    }
+
+    // юс╫ц
+    private void OnDisable()
+    {
+        characterRegistry.Unregister(this);
     }
 }
