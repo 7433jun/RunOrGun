@@ -75,7 +75,8 @@ public class PlayerProjectileAttack : PlayerAttackBehavior
             projectileObj = Instantiate(projectilePrefab, projectileSpawnPos, projectileRot);
         }
         var projectile = projectileObj.GetComponent<PlayerProjectile>();
-        projectile.Initilize(player, projectileDir, projectilePool);
+        // 데미지, 크리티컬 적용하기
+        projectile.Initilize(player, 1.0f, false, projectileDir, projectilePool);
 
         // 남은 탄환 없으면 장전시작
         if (playerStats.Ammo.AmmoCurrent == 0)

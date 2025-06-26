@@ -16,6 +16,9 @@ public class PlayerProjectile : MonoBehaviour
     [SerializeField] private int bounceEnemy;
     [SerializeField] private int pierceEnemy;
 
+    [SerializeField] private float damage;
+    [SerializeField] private bool critical;
+
     [SerializeField] private float lifeTimer;
 
     Queue<GameObject> pool;
@@ -23,7 +26,7 @@ public class PlayerProjectile : MonoBehaviour
 
     private Rigidbody rigidBody;
 
-    public void Initilize(Player player, Vector3 direction, Queue<GameObject> pool)
+    public void Initilize(Player player, float damageFinal, bool criticalFlag, Vector3 direction, Queue<GameObject> pool)
     {
         this.player = player;
         // 투사체 스탯값 기입
@@ -35,6 +38,9 @@ public class PlayerProjectile : MonoBehaviour
         pierceEnemy = player.Stats.Projectile.pierceEnemy;
 
         transform.localScale = sizeBase * sizeRate;
+
+        damage = damageFinal;
+        critical = criticalFlag;
 
         this.direction = direction.normalized;
 
